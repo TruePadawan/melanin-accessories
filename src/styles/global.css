@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+	--color-primary: rgb(169, 108, 254);
+	--color-secondary: rgb(218, 230, 142);
+	--color-accent: rgb(177, 222, 104);
+
+	--color-primary-dark: rgb(62, 1, 147);
+	--color-secondary-dark: rgb(101, 113, 25);
+	--color-accent-dark: rgb(106, 151, 33);
+
+	--font-lexend: "Lexend", sans-serif;
+	--font-geist-mono: "Geist Mono", monospace;
+}
+
+html,
+body {
+	font-family: var(--font-lexend);
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
