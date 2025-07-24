@@ -1,12 +1,17 @@
 ---
+import "../styles/global.css";
+import SearchIcon from "../../public/icons/search-icon.svg";
+
 const { pageTitle } = Astro.props;
+const interestsCount = 0;
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,15 +22,38 @@ const { pageTitle } = Astro.props;
 		<title>{pageTitle}</title>
 	</head>
 	<body>
+		<nav class="flex items-center justify-between p-4 bg-white">
+			<a href="/" class="flex gap-1 items-center">
+				<img
+					src="/brand_logo.png"
+					alt="Melanin Accessories Logo"
+					class="h-12 w-auto"
+				/>
+				<div class="logo font-bold text-xl flex flex-col gap-2">
+					<span class="text-primary">MELANIN</span>
+					<span class="block ms-2 leading-0">ACCESSORIES</span>
+				</div>
+			</a>
+			<div class="flex items-center gap-12 font-normal">
+				<a href="/">HOME</a>
+				<a href="/catalog">CATALOG</a>
+				<a href="/blog">BLOG</a>
+			</div>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
+					<SearchIcon />
+				</button>
+				<a href="/interests">MY INTERESTS ({interestsCount})</a>
+			</div>
+		</nav>
 		<slot />
 	</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+	.logo {
+		height: -webkit-fill-available;
+		height: -moz-available;
 	}
 </style>
