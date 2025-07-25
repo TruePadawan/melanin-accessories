@@ -10,12 +10,14 @@
 	--color-accent-dark: rgb(106, 151, 33);
 
 	--font-lexend: "Lexend", sans-serif;
-	--font-geist-mono: "Geist Mono", monospace;
+	--font-faculty-glyphic: "Faculty Glyphic", sans-serif;
+	--font-montserrat: "Montserrat", sans-serif;
+	--font-playfair: "Playfair Display", serif;
 }
 
 html,
 body {
-	font-family: var(--font-lexend);
+	font-family: var(--font-montserrat);
 	margin: 0;
 	width: 100%;
 	height: 100%;

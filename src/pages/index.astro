@@ -1,6 +1,57 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import ChevronRight from "../../public/icons/chevron-right.svg";
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
+	<main class="grow p-8 py-16 md:px-32 md:py-44 flex flex-col gap-8">
+		<h1
+			class="tracking-widest text-4xl md:text-5xl xl:text-6xl font-medium font-playfair">
+			Fashion meets Self-Expression
+		</h1>
+		<p class="text-xl xl:2xl font-montserrat font-light max-w-2xl text-gray-700">
+			A place to elevate your style with our accessories. From statement
+			pieces to timeless essentials, every item is crafted with love and
+			attention to detail
+		</p>
+		<a
+			href="/catalog"
+			id="browse-catalog"
+			class="flex justify-center md:self-start mt-6 p-6 border-2 border-primary shadow-sm rounded-sm font-montserrat font-medium hover:bg-primary hover:text-white">
+			<span>Browse our catalog</span>
+			<ChevronRight id="chevron-right" />
+		</a>
+	</main>
 </Layout>
+
+<style>
+	body {
+		background-image: url("/images/hero.jpg");
+		background-size: cover;
+		background-position: left top 25%;
+		background-repeat: no-repeat;
+		backdrop-filter: blur(1px);
+	}
+
+	#browse-catalog {
+		display: flex;
+		gap: 1rem;
+		transition: background-color 200ms;
+
+		#chevron-right {
+			width: 0;
+			opacity: 0;
+			transform: translateX(-10px);
+			transition: all 200ms ease;
+			overflow: hidden;
+		}
+
+		&:hover {
+			#chevron-right {
+				width: 24px;
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+	}
+</style>
