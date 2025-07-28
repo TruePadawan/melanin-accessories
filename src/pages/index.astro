@@ -1,10 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ChevronRight from "../../public/icons/chevron-right.svg";
+import ChevronLeft from "../../public/icons/chevron-left.svg";
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
-	<main class="grow p-8 py-16 md:px-32 md:py-44 flex flex-col gap-8">
+	<main
+		class="grow mt-16 p-8 py-16 md:px-32 md:py-44 flex flex-col gap-8"
+		slot="hero">
 		<h1
 			class="tracking-widest text-4xl md:text-5xl xl:text-6xl font-medium font-playfair">
 			Fashion meets Self-Expression
@@ -23,16 +26,217 @@ import ChevronRight from "../../public/icons/chevron-right.svg";
 			<ChevronRight id="chevron-right" />
 		</a>
 	</main>
+	<section
+		aria-labelledby="latest"
+		class="bg-white p-8 md:p-16 lg:px-32 font-lexend">
+		<div class="flex justify-between items-center">
+			<h2 id="latest" class="text-2xl font-medium">Latest</h2>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronLeft />
+				</button>
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronRight />
+				</button>
+			</div>
+		</div>
+		<ul
+			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<section
+		aria-labelledby="categories"
+		class="bg-white p-8 md:p-16 lg:px-32 font-lexend">
+		<div class="flex justify-between items-center">
+			<h2 id="latest" class="text-2xl font-medium">Categories</h2>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronLeft />
+				</button>
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronRight />
+				</button>
+			</div>
+		</div>
+		<ul
+			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+			<li class="max-w-sm">
+				<a href="#">
+					<img
+						src="/images/earring.jpg"
+						alt="Latest Item"
+						class="w-full h-[384px] object-top object-cover"
+					/>
+				</a>
+				<a
+					class="mt-4 font-semibold text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Earrings</span>
+					<ChevronRight />
+				</a>
+			</li>
+			<li class="max-w-sm">
+				<a href="#">
+					<img
+						src="/images/ring.jpg"
+						alt="Latest Item"
+						class="w-full max-h-[384px] object-top object-cover"
+					/>
+				</a>
+				<a
+					class="mt-4 font-semibold text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Rings</span>
+					<ChevronRight />
+				</a>
+			</li>
+			<li class="max-w-sm">
+				<a href="#">
+					<img
+						src="/images/bracelet.jpg"
+						alt="Latest Item"
+						class="w-full h-[384px] object-top object-cover"
+					/>
+				</a>
+				<a
+					class="mt-4 font-semibold text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Bracelets</span>
+					<ChevronRight />
+				</a>
+			</li>
+			<li class="max-w-sm">
+				<a href="#">
+					<img
+						src="/images/necklace.jpg"
+						alt="Latest Item"
+						class="w-full h-[384px] object-cover"
+					/>
+				</a>
+				<a
+					class="mt-4 font-semibold text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Necklaces</span>
+					<ChevronRight />
+				</a>
+			</li>
+		</ul>
+	</section>
+	<section
+		aria-labelledby="latest"
+		class="bg-white p-8 md:p-16 lg:px-32 font-lexend">
+		<div class="flex justify-between items-center">
+			<h2 id="latest" class="text-2xl font-medium">Best Sellers</h2>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronLeft />
+				</button>
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronRight />
+				</button>
+			</div>
+		</div>
+		<ul
+			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="max-w-sm">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full h-[384px] object-top object-cover"
+				/>
+				<div class="p-4">
+					<h3 class="text-lg font-semibold">Item Title</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+		</ul>
+	</section>
 </Layout>
 
 <style>
-	body {
-		background-image: url("/images/hero.jpg");
-		background-size: cover;
-		background-position: left top 25%;
-		background-repeat: no-repeat;
-	}
-
 	#browse-catalog {
 		display: flex;
 		gap: 1rem;

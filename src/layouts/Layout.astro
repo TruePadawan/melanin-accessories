@@ -23,40 +23,107 @@ const interestsCount = 0;
 		/>
 		<title>{pageTitle}</title>
 	</head>
-	<body class="flex flex-col">
-		<nav
-			class="flex items-center justify-between p-4 bg-opacity-80 backdrop-blur-xs bg-white">
-			<a href="/" class="flex gap-1 items-center">
-				<img
-					src="/brand_logo.png"
-					alt="Melanin Accessories Logo"
-					class="h-10 md:h-12 w-auto"
-				/>
-				<div class="logo font-bold text-md md:text-xl flex flex-col gap-2">
-					<span class="text-primary">MELANIN</span>
-					<span class="block ms-2 leading-0 text-black"
-						>ACCESSORIES</span
-					>
+	<body>
+		<div class="hero h-screen">
+			<nav
+				class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-50 lg:px-32 md:px-16">
+				<a href="/" class="flex gap-1 items-center">
+					<img
+						src="/brand_logo.png"
+						alt="Melanin Accessories Logo"
+						class="h-10 md:h-12 w-auto"
+					/>
+					<div
+						class="logo font-bold text-md md:text-xl flex flex-col gap-2">
+						<span class="text-primary">MELANIN</span>
+						<span class="block ms-2 leading-0 text-black"
+							>ACCESSORIES</span
+						>
+					</div>
+				</a>
+				<div
+					class="hidden md:flex items-center gap-6 lg:gap-12 font-normal">
+					<a href="/">HOME</a>
+					<a href="/catalog">CATALOG</a>
+					<a href="/blog">BLOG</a>
 				</div>
-			</a>
-			<div class="hidden md:flex items-center gap-6 lg:gap-12 font-normal">
-				<a href="/">HOME</a>
-				<a href="/catalog">CATALOG</a>
-				<a href="/blog">BLOG</a>
-			</div>
-			<div class="hidden md:flex items-center gap-4">
-				<button
-					class="p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
-					<SearchIcon />
-				</button>
-				<a href="/interests">MY INTERESTS ({interestsCount})</a>
-			</div>
-			<div class="md:hidden flex items-center gap-4">
-				<SmileIcon class="w-8" />
-				<HamburgerIcon class="w-8" />
-			</div>
-		</nav>
+				<div class="hidden md:flex items-center gap-4">
+					<button
+						class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+						<SearchIcon />
+					</button>
+					<a href="/interests">MY INTERESTS ({interestsCount})</a>
+				</div>
+				<div class="md:hidden flex items-center gap-4">
+					<SmileIcon class="w-8" />
+					<HamburgerIcon class="w-8" />
+				</div>
+			</nav>
+			<slot name="hero" />
+		</div>
 		<slot />
+		<section
+			aria-labelledby="whatsapp-group"
+			class="p-8 md:p-16 lg:px-32 lg:py-28 font-lexend bg-[#25D366] text-white text-center relative overflow-hidden">
+			<img
+				src="/glyphs/whatsapp.svg"
+				alt="WhatsApp Icon"
+				class="w-96 absolute right-0 top-1/2 -translate-y-1/2 opacity-10"
+			/>
+			<div>
+				<h2 id="whatsapp-group" class="text-4xl font-medium">
+					Join Our WhatsApp Group
+				</h2>
+				<p class="mt-2">
+					Stay updated with the latest news, offers, and community
+					discussions.
+				</p>
+				<a
+					href="https://chat.whatsapp.com/IMBxX8TVah86rgGIgF1TML"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="mt-4 inline-block bg-white text-[#25D366] px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors">
+					Join Now
+				</a>
+			</div>
+		</section>
+		<footer class="bg-[#F0F1F0] p-4 md:p-8 lg:px-32 font-lexend">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div>
+            <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+            <ul class="flex flex-col gap-2">
+                <li><a href="/" class="text-gray-600 hover:text-primary">Home</a></li>
+                <li><a href="/catalog" class="text-gray-600 hover:text-primary">Catalog</a></li>
+                <li><a href="/blog" class="text-gray-600 hover:text-primary">Blog</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="font-semibold text-lg mb-4">Contact Us</h3>
+            <ul class="flex flex-col gap-2">
+                <li class="text-gray-600">
+                    <span class="font-medium">Email:</span>
+                    <a href="mailto:info@melaninaccessories.com" class="hover:text-primary">
+                        info@melaninaccessories.com
+                    </a>
+                </li>
+                <li class="text-gray-600">
+                    <span class="font-medium">Phone:</span>
+                    <a href="tel:+254712345678" class="hover:text-primary">
+                        +234 815 828 9001
+                    </a>
+                </li>
+                <li class="text-gray-600">
+                    <span class="font-medium">Location:</span>
+                    <span>Oyo, Nigeria</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr class="border-gray-300 mb-4" />
+    <p class="text-sm text-gray-600 text-center">
+        &copy; {new Date().getFullYear()} Melanin Accessories. All rights reserved.
+    </p>
+</footer>
 	</body>
 </html>
 
@@ -68,5 +135,12 @@ const interestsCount = 0;
 
 	nav {
 		font-family: var(--font-lexend);
+	}
+
+	.hero {
+		background-image: url("/images/hero.jpg");
+		background-size: cover;
+		background-position: left top 25%;
+		background-repeat: no-repeat;
 	}
 </style>
