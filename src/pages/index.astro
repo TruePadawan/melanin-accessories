@@ -5,246 +5,280 @@ import ChevronLeft from "../../public/icons/chevron-left.svg";
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
-    <main
-        class="grow mt-12 sm:mt-16 p-4 sm:p-8 py-12 sm:py-16 md:px-32 md:py-44 flex flex-col gap-6 sm:gap-8"
-        slot="hero">
-        <h1
-            class="tracking-widest text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium font-playfair">
-            Fashion meets Self-Expression
-        </h1>
-        <p
-            class="text-lg sm:text-xl xl:2xl font-montserrat font-light max-w-2xl text-gray-700">
-            A place to elevate your style with our accessories. From statement
-            pieces to timeless essentials, every item is crafted with love and
-            attention to detail
-        </p>
-        <a
-            href="/catalog"
-            id="browse-catalog"
-            class="flex justify-center w-full sm:w-auto md:self-start mt-4 sm:mt-6 p-4 sm:p-6 border-2 border-primary shadow-sm rounded-sm font-montserrat font-medium hover:bg-primary hover:text-white">
-            <span>Browse our catalog</span>
-            <ChevronRight id="chevron-right" />
-        </a>
-    </main>
+	<main
+		class="grow mt-12 sm:mt-16 p-4 sm:p-8 py-12 sm:py-16 md:px-32 md:py-44 flex flex-col gap-6 sm:gap-8"
+		slot="hero">
+		<h1
+			class="tracking-widest text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium font-playfair">
+			Fashion meets Self-Expression
+		</h1>
+		<p
+			class="text-lg sm:text-xl xl:2xl font-montserrat font-light max-w-2xl text-gray-700">
+			A place to elevate your style with our accessories. From statement
+			pieces to timeless essentials, every item is crafted with love and
+			attention to detail
+		</p>
+		<a
+			href="/catalog"
+			id="browse-catalog"
+			class="flex gap-2 justify-center w-full sm:w-auto md:self-start mt-4 sm:mt-6 p-4 sm:p-6 border-2 border-primary shadow-sm rounded-sm font-montserrat font-medium hover:bg-primary hover:text-white">
+			<span>Browse our catalog</span>
+			<ChevronRight id="chevron-right" />
+		</a>
+	</main>
 
-    <section
-        aria-labelledby="latest"
-        class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
-        <div class="flex justify-between items-center">
-            <h2 id="latest" class="text-2xl font-medium">Latest</h2>
-            <div class="flex items-center gap-4">
-                <button
-                    class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                    <ChevronLeft />
-                </button>
-                <button
-                    class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                    <ChevronRight />
-                </button>
-            </div>
-        </div>
-        <ul
-            class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-        </ul>
-    </section>
-    <section
-        aria-labelledby="categories"
-        class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
-        <div class="flex justify-between items-center">
-            <h2 id="latest" class="text-2xl font-medium">Categories</h2>
-            <div class="flex items-center gap-4">
-                <button
-                    class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                    <ChevronLeft />
-                </button>
-                <button
-                    class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                    <ChevronRight />
-                </button>
-            </div>
-        </div>
-        <ul
-            class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
-            <li class="w-full max-w-sm mx-auto">
-                <a href="#">
-                    <img
-                        src="/images/earring.jpg"
-                        alt="Category Item"
-                        class="w-full aspect-[3/4] object-cover"
-                    />
-                </a>
-                <a
-                    class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
-                    href="#">
-                    <span>Earrings</span>
-                    <ChevronRight />
-                </a>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <a href="#">
-                    <img
-                        src="/images/ring.jpg"
-                        alt="Category Item"
-                        class="w-full aspect-[3/4] object-cover"
-                    />
-                </a>
-                <a
-                    class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
-                    href="#">
-                    <span>Rings</span>
-                    <ChevronRight />
-                </a>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <a href="#">
-                    <img
-                        src="/images/bracelet.jpg"
-                        alt="Category Item"
-                        class="w-full aspect-[3/4] object-cover"
-                    />
-                </a>
-                <a
-                    class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
-                    href="#">
-                    <span>Bracelets</span>
-                    <ChevronRight />
-                </a>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <a href="#">
-                    <img
-                        src="/images/necklace.jpg"
-                        alt="Category Item"
-                        class="w-full aspect-[3/4] object-cover"
-                    />
-                </a>
-                <a
-                    class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
-                    href="#">
-                    <span>Necklaces</span>
-                    <ChevronRight />
-                </a>
-            </li>
-        </ul>
-    </section>
-    <section
-        aria-labelledby="latest"
-        class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
-        <div class="flex justify-between items-center">
-            <h2 id="latest" class="text-2xl font-medium">Best Sellers</h2>
-            <div class="flex items-center gap-4">
-                <button
-                    class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                    <ChevronLeft />
-                </button>
-                <button
-                    class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                    <ChevronRight />
-                </button>
-            </div>
-        </div>
-        <ul
-            class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-            <li class="w-full max-w-sm mx-auto">
-                <img
-                    src="/images/test.jpg"
-                    alt="Latest Item"
-                    class="w-full aspect-[3/4] object-cover"
-                />
-                <div class="p-3 sm:p-4">
-                    <h3 class="text-base sm:text-lg font-semibold">Item Title</h3>
-                    <p class="mt-1 text-gray-600">$19.99</p>
-                </div>
-            </li>
-        </ul>
-    </section>
+	<section
+		aria-labelledby="latest"
+		class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
+		<div class="flex justify-between items-center">
+			<h2 id="latest" class="text-2xl font-medium">Latest</h2>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronLeft />
+				</button>
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronRight />
+				</button>
+			</div>
+		</div>
+		<ul
+			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<section
+		aria-labelledby="categories"
+		class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
+		<div class="flex justify-between items-center">
+			<h2 id="latest" class="text-2xl font-medium">Categories</h2>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronLeft />
+				</button>
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronRight />
+				</button>
+			</div>
+		</div>
+		<ul
+			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
+			<li class="w-full max-w-sm mx-auto">
+				<a href="#">
+					<img
+						src="/images/earring.jpg"
+						alt="Category Item"
+						class="w-full aspect-[3/4] object-cover"
+					/>
+				</a>
+				<a
+					class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Earrings</span>
+					<ChevronRight />
+				</a>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<a href="#">
+					<img
+						src="/images/ring.jpg"
+						alt="Category Item"
+						class="w-full aspect-[3/4] object-cover"
+					/>
+				</a>
+				<a
+					class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Rings</span>
+					<ChevronRight />
+				</a>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<a href="#">
+					<img
+						src="/images/bracelet.jpg"
+						alt="Category Item"
+						class="w-full aspect-[3/4] object-cover"
+					/>
+				</a>
+				<a
+					class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Bracelets</span>
+					<ChevronRight />
+				</a>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<a href="#">
+					<img
+						src="/images/necklace.jpg"
+						alt="Category Item"
+						class="w-full aspect-[3/4] object-cover"
+					/>
+				</a>
+				<a
+					class="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+					href="#">
+					<span>Necklaces</span>
+					<ChevronRight />
+				</a>
+			</li>
+		</ul>
+	</section>
+	<section
+		aria-labelledby="latest"
+		class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
+		<div class="flex justify-between items-center">
+			<h2 id="latest" class="text-2xl font-medium">Best Sellers</h2>
+			<div class="flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronLeft />
+				</button>
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<ChevronRight />
+				</button>
+			</div>
+		</div>
+		<ul
+			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+			<li class="w-full max-w-sm mx-auto">
+				<img
+					src="/images/test.jpg"
+					alt="Latest Item"
+					class="w-full aspect-[3/4] object-cover"
+				/>
+				<div class="p-3 sm:p-4">
+					<h3 class="text-base sm:text-lg font-semibold">
+						Item Title
+					</h3>
+					<p class="mt-1 text-gray-600">$19.99</p>
+				</div>
+			</li>
+		</ul>
+	</section>
 </Layout>
 
 <style>
-    #browse-catalog {
-        @media (max-width: 640px) {
-            gap: 0.5rem;
+	#browse-catalog {
+		transition: background-color 200ms;
 
-            #chevron-right {
-                width: 20px;
-            }
-        }
-    }
+		#chevron-right {
+			width: 0;
+			opacity: 0;
+			transform: translateX(-10px);
+			transition: all 200ms ease;
+			overflow: hidden;
+		}
+
+		&:hover {
+			#chevron-right {
+				width: 24px;
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@media (max-width: 640px) {
+			gap: 0.5rem;
+
+			#chevron-right {
+				width: 20px;
+			}
+		}
+	}
 </style>
