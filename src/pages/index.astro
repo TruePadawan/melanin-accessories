@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ChevronRight from "../../public/icons/chevron-right.svg";
-import ChevronLeft from "../../public/icons/chevron-left.svg";
-import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro";
+import ChevronRight from "../assets/icons/chevron-right.svg";
+import ChevronLeft from "../assets/icons/chevron-left.svg";
+import CategoriesCarousel from "../components/carousel/CategoriesCarousel";
+import TestImg from "../assets/images/test.jpg";
+import { Image } from "astro:assets";
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
@@ -47,8 +49,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 		<ul
 			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -60,8 +62,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 				</div>
 			</li>
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -73,8 +75,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 				</div>
 			</li>
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -86,8 +88,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 				</div>
 			</li>
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -100,7 +102,7 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 			</li>
 		</ul>
 	</section>
-	<CategoriesCarousel />
+	<CategoriesCarousel client:load />
 	<section
 		aria-labelledby="latest"
 		class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
@@ -120,8 +122,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 		<ul
 			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -133,8 +135,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 				</div>
 			</li>
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -146,8 +148,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 				</div>
 			</li>
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>
@@ -159,8 +161,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel.astro"
 				</div>
 			</li>
 			<li class="w-full max-w-sm mx-auto">
-				<img
-					src="/images/test.jpg"
+				<Image
+					src={TestImg}
 					alt="Latest Item"
 					class="w-full aspect-[3/4] object-cover"
 				/>

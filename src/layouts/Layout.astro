@@ -1,8 +1,11 @@
 ---
 import "../styles/global.css";
-import SearchIcon from "../../public/icons/search-icon.svg";
-import SmileIcon from "../../public/icons/smile.svg";
-import HamburgerIcon from "../../public/icons/hamburger.svg";
+import SearchIcon from "../assets/icons/search-icon.svg";
+import SmileIcon from "../assets/icons/smile.svg";
+import HamburgerIcon from "../assets/icons/hamburger.svg";
+import WhatsAppImage from "../assets/glyphs/whatsapp.svg";
+import BrandLogo from "../assets/logos/brand_logo.png";
+import { Image } from "astro:assets";
 
 const { pageTitle } = Astro.props;
 const interestsCount = 0;
@@ -29,7 +32,7 @@ const interestsCount = 0;
 				class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-50 lg:px-32 md:px-16">
 				<a href="/" class="flex gap-1 items-center">
 					<img
-						src="/brand_logo.png"
+						src={BrandLogo.src}
 						alt="Melanin Accessories Logo"
 						class="h-10 md:h-12 w-auto"
 					/>
@@ -65,8 +68,8 @@ const interestsCount = 0;
 		<section
 			aria-labelledby="whatsapp-group"
 			class="p-8 md:p-16 lg:px-32 lg:py-28 font-lexend bg-[#25D366] text-white text-center relative overflow-hidden">
-			<img
-				src="/glyphs/whatsapp.svg"
+			<Image
+				src={WhatsAppImage}
 				alt="WhatsApp Icon"
 				class="w-96 absolute right-0 top-1/2 -translate-y-1/2 opacity-10"
 			/>
@@ -88,42 +91,62 @@ const interestsCount = 0;
 			</div>
 		</section>
 		<footer class="bg-[#F0F1F0] p-4 md:p-8 lg:px-32 font-lexend">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        <div>
-            <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
-            <ul class="flex flex-col gap-2">
-                <li><a href="/" class="text-gray-600 hover:text-primary">Home</a></li>
-                <li><a href="/catalog" class="text-gray-600 hover:text-primary">Catalog</a></li>
-                <li><a href="/blog" class="text-gray-600 hover:text-primary">Blog</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="font-semibold text-lg mb-4">Contact Us</h3>
-            <ul class="flex flex-col gap-2">
-                <li class="text-gray-600">
-                    <span class="font-medium">Email:</span>
-                    <a href="mailto:info@melaninaccessories.com" class="hover:text-primary">
-                        info@melaninaccessories.com
-                    </a>
-                </li>
-                <li class="text-gray-600">
-                    <span class="font-medium">Phone:</span>
-                    <a href="tel:+254712345678" class="hover:text-primary">
-                        +234 815 828 9001
-                    </a>
-                </li>
-                <li class="text-gray-600">
-                    <span class="font-medium">Location:</span>
-                    <span>Oyo, Nigeria</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <hr class="border-gray-300 mb-4" />
-    <p class="text-sm text-gray-600 text-center">
-        &copy; {new Date().getFullYear()} Melanin Accessories. All rights reserved.
-    </p>
-</footer>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+				<div>
+					<h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+					<ul class="flex flex-col gap-2">
+						<li>
+							<a href="/" class="text-gray-600 hover:text-primary"
+								>Home</a
+							>
+						</li>
+						<li>
+							<a
+								href="/catalog"
+								class="text-gray-600 hover:text-primary"
+								>Catalog</a
+							>
+						</li>
+						<li>
+							<a
+								href="/blog"
+								class="text-gray-600 hover:text-primary">Blog</a
+							>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="font-semibold text-lg mb-4">Contact Us</h3>
+					<ul class="flex flex-col gap-2">
+						<li class="text-gray-600">
+							<span class="font-medium">Email:</span>
+							<a
+								href="mailto:info@melaninaccessories.com"
+								class="hover:text-primary">
+								info@melaninaccessories.com
+							</a>
+						</li>
+						<li class="text-gray-600">
+							<span class="font-medium">Phone:</span>
+							<a
+								href="tel:+254712345678"
+								class="hover:text-primary">
+								+234 815 828 9001
+							</a>
+						</li>
+						<li class="text-gray-600">
+							<span class="font-medium">Location:</span>
+							<span>Oyo, Nigeria</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<hr class="border-gray-300 mb-4" />
+			<p class="text-sm text-gray-600 text-center">
+				&copy; {new Date().getFullYear()} Melanin Accessories. All rights
+				reserved.
+			</p>
+		</footer>
 	</body>
 </html>
 
@@ -138,7 +161,7 @@ const interestsCount = 0;
 	}
 
 	.hero {
-		background-image: url("/images/hero.jpg");
+		background-image: url("../assets/images/hero.jpg");
 		background-size: cover;
 		background-position: left top 25%;
 		background-repeat: no-repeat;
