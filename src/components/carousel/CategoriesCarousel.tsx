@@ -30,7 +30,6 @@ export default function CategoriesCarousel() {
 				{ lastId: lastId.current }
 			);
 
-			console.log(nextCategories);
 			setAtEnd(nextCategories.length < 4);
 			if (nextCategories.length > 0) {
 				setAtBeginning(false);
@@ -45,7 +44,6 @@ export default function CategoriesCarousel() {
 				{ firstId: firstId.current }
 			);
 
-			console.log(prevCategories);
 			if (prevCategories.length > 0) {
 				setAtEnd(false);
 				setCategories(prevCategories);
@@ -89,7 +87,7 @@ export default function CategoriesCarousel() {
 					</button>
 				</div>
 			</div>
-			<ul className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
+			<ul className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-3 sm:gap-x-4 mt-4">
 				{categories.map((category) => (
 					<li className="w-full max-w-sm mx-auto" key={category._id}>
 						<a href={`/catalog/${category.slug.current}`}>
