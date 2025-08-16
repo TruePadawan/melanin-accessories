@@ -1,10 +1,29 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ChevronRight from "../assets/icons/chevron-right.svg";
-import ChevronLeft from "../assets/icons/chevron-left.svg";
 import CategoriesCarousel from "../components/carousel/CategoriesCarousel";
-import TestImg from "../assets/images/test.jpg";
-import { Image } from "astro:assets";
+import { sanityClient } from "sanity:client";
+import type { Product } from "../../sanity.types.ts";
+import ProductItem from "../components/ProductItem.astro";
+
+const latestProducts = await sanityClient.fetch<Product[]>(
+	`*[_type == "product"] | order(_createdAt desc) [0...8] {
+		_id,
+		title,
+		slug,
+		price,
+		images
+	}`
+);
+const highInterestProducts = await sanityClient.fetch<Product[]>(
+	`*[_type == "product"] | order(interestCount desc) [0...8] {
+		_id,
+		title,
+		slug,
+		price,
+		images
+	}`
+);
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
@@ -33,147 +52,41 @@ import { Image } from "astro:assets";
 	<section
 		aria-labelledby="latest"
 		class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
-		<div class="flex justify-between items-center">
+		<div class="flex items-center">
 			<h2 id="latest" class="text-2xl font-medium">Latest</h2>
-			<div class="flex items-center gap-4">
-				<button
-					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-					<ChevronLeft />
-				</button>
-				<button
-					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-					<ChevronRight />
-				</button>
-			</div>
 		</div>
-		<ul
-			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-		</ul>
+		{
+			latestProducts.length > 0 ? (
+				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
+					{latestProducts.map((product) => (
+						<ProductItem product={product} />
+					))}
+				</ul>
+			) : (
+				<p class="text-gray-500">No latest products available.</p>
+			)
+		}
 	</section>
 	<CategoriesCarousel client:load />
 	<section
 		aria-labelledby="latest"
 		class="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
-		<div class="flex justify-between items-center">
-			<h2 id="latest" class="text-2xl font-medium">Best Sellers</h2>
-			<div class="flex items-center gap-4">
-				<button
-					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-					<ChevronLeft />
-				</button>
-				<button
-					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-					<ChevronRight />
-				</button>
-			</div>
+		<div class="flex items-center">
+			<h2 id="latest" class="text-2xl font-medium">High Interests</h2>
 		</div>
-		<ul
-			class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-			<li class="w-full max-w-sm mx-auto">
-				<Image
-					src={TestImg}
-					alt="Latest Item"
-					class="w-full aspect-[3/4] object-cover"
-				/>
-				<div class="p-3 sm:p-4">
-					<h3 class="text-base sm:text-lg font-semibold">
-						Item Title
-					</h3>
-					<p class="mt-1 text-gray-600">$19.99</p>
-				</div>
-			</li>
-		</ul>
+		{
+			highInterestProducts.length > 0 ? (
+				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
+					{highInterestProducts.map((product) => (
+						<ProductItem product={product} />
+					))}
+				</ul>
+			) : (
+				<p class="text-gray-500">
+					No high interest products available.
+				</p>
+			)
+		}
 	</section>
 </Layout>
 
