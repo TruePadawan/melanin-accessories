@@ -20,7 +20,7 @@ export type Product = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  slug?: Slug;
+  slug: Slug;
   description?: string;
   price: number;
   discount?: number;
@@ -38,7 +38,7 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
-  interestCount?: number;
+  interestCount: number;
   category?: {
     _ref: string;
     _type: "reference";

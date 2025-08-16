@@ -47,7 +47,7 @@
           "type": "inline",
           "name": "slug"
         },
-        "optional": true
+        "optional": false
       },
       "description": {
         "type": "objectAttribute",
@@ -165,7 +165,7 @@
         "value": {
           "type": "number"
         },
-        "optional": true
+        "optional": false
       },
       "category": {
         "type": "objectAttribute",
