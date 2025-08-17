@@ -6,6 +6,7 @@ import HamburgerIcon from "../assets/icons/hamburger.svg";
 import WhatsAppImage from "../assets/glyphs/whatsapp.svg";
 import BrandLogo from "../assets/logos/brand_logo.png";
 import { Image } from "astro:assets";
+import Sidebar from "../components/Sidebar";
 
 const { pageTitle } = Astro.props;
 const interestsCount = 0;
@@ -29,7 +30,7 @@ const interestsCount = 0;
 	<body>
 		<div class="hero h-screen">
 			<nav
-				class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-50 lg:px-32 md:px-16">
+				class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-40 lg:px-32 md:px-16">
 				<a href="/" class="flex gap-1 items-center">
 					<img
 						src={BrandLogo.src}
@@ -55,8 +56,8 @@ const interestsCount = 0;
 						class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
 						<SearchIcon />
 					</button>
-					<a href="/interests" id="interest-count"
-						>MY INTERESTS ({interestsCount})</a
+					<button id="interest-count" class="cursor-pointer">
+						MY INTERESTS ({interestsCount})</button
 					>
 				</div>
 				<div class="md:hidden flex items-center gap-4">
@@ -149,6 +150,7 @@ const interestsCount = 0;
 				reserved.
 			</p>
 		</footer>
+		<Sidebar client:idle />
 	</body>
 </html>
 
@@ -171,12 +173,15 @@ const interestsCount = 0;
 </style>
 
 <script>
-	import { interests } from "../store/interests";
+	import { interests, isSidebarOpen } from "../store/interests";
 
+	const myInterestsButton = document.getElementById("interest-count");
 	interests.subscribe((value) => {
-		const interestCountElement = document.getElementById("interest-count");
-		if (interestCountElement) {
-			interestCountElement.textContent = `MY INTERESTS (${Object.keys(value).length})`;
+		if (myInterestsButton) {
+			myInterestsButton.textContent = `MY INTERESTS (${Object.keys(value).length})`;
 		}
+	});
+	myInterestsButton?.addEventListener("click", () => {
+		isSidebarOpen.set(true);
 	});
 </script>
