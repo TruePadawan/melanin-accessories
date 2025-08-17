@@ -1,6 +1,8 @@
 ---
 import type { Product } from "../../sanity.types";
 import { urlForImage } from "../utils/sanity-utils";
+import ProductItemInterestButton from "./ProductItemInterestButton";
+
 interface Props {
 	product: Pick<Product, "_id" | "title" | "slug" | "price" | "images">;
 }
@@ -8,21 +10,24 @@ const { product } = Astro.props;
 ---
 
 <li class="w-full max-w-sm mx-auto">
-	<a href={`/products/${product.slug.current}`} class="block">
+	<a href={`/products/${product.slug.current}`} class="block overflow-hidden">
 		<img
 			src={urlForImage(product.images[0]).url()}
 			alt={product.title}
-			class="w-full aspect-square object-cover"
+			class="w-full aspect-square object-cover transition-transform duration-300 hover:scale-110"
 		/>
 	</a>
-	<div class="py-3 sm:py-4">
-		<a href={`/products/${product.slug.current}`} class="block">
-			<h3 class="text-base sm:text-lg font-semibold">
-				{product.title}
-			</h3>
-		</a>
-		<p class="text-gray-600">
-			NGN {product.price.toFixed(2)}
-		</p>
+	<div class="flex">
+		<div class="grow py-3 sm:py-4 px-2 bg-black/10">
+			<a href={`/products/${product.slug.current}`} class="block">
+				<h3 class="text-base sm:text-lg">
+					{product.title}
+				</h3>
+			</a>
+			<p class="text-gray-600 font-semibold">
+				NGN {product.price.toFixed(2)}
+			</p>
+		</div>
+		<ProductItemInterestButton product={product} client:only="react" />
 	</div>
 </li>
