@@ -25,7 +25,7 @@ const { product } = Astro.props;
 				</h3>
 			</a>
 			<p class="text-gray-600 font-semibold">
-				NGN {product.price.toFixed(2)}
+				₦{product.price.toFixed(2)}
 			</p>
 		</div>
 		<ProductItemInterestButton product={product} client:only="react" />
