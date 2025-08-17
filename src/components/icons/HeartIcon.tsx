@@ -1,7 +1,6 @@
-interface HeartIconProps {
-	className?: string;
-}
-export default function HeartIcon({ className = "" }: HeartIconProps) {
+import type { IconProps } from "./types";
+
+export default function HeartIcon({ className = "" }: IconProps) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

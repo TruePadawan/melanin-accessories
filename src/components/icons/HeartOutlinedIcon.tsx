@@ -1,9 +1,6 @@
-interface HeartOutlinedIconProps {
-	className?: string;
-}
-export default function HeartOutlinedIcon({
-	className = "",
-}: HeartOutlinedIconProps) {
+import type { IconProps } from "./types";
+
+export default function HeartOutlinedIcon({ className = "" }: IconProps) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
