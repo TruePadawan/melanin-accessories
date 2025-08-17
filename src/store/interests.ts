@@ -1,15 +1,14 @@
 import { persistentMap } from "@nanostores/persistent";
 import type { Product } from "../../sanity.types";
+import { atom } from "nanostores";
 
-export type ItemOfInterest = {
-	[id: string]: Pick<Product, "_id" | "title"> & {
-		slug: string;
-		price: string;
-		image: string;
-	};
+export type ProductOfInterest = Pick<Product, "_id" | "title"> & {
+	slug: string;
+	price: string;
+	image: string;
 };
 
-export const interests = persistentMap<ItemOfInterest>(
+export const interests = persistentMap<Record<string, ProductOfInterest>>(
 	"interests:",
 	{},
 	{
@@ -17,3 +16,5 @@ export const interests = persistentMap<ItemOfInterest>(
 		decode: JSON.parse,
 	}
 );
+
+export const isSidebarOpen = atom(false);
