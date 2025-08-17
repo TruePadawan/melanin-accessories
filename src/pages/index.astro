@@ -5,6 +5,8 @@ import CategoriesCarousel from "../components/carousel/CategoriesCarousel";
 import { sanityClient } from "sanity:client";
 import type { Product } from "../../sanity.types.ts";
 import ProductItem from "../components/ProductItem.astro";
+import WhatsAppImage from "../assets/glyphs/whatsapp.svg";
+import { Image } from "astro:assets";
 
 const latestProducts = await sanityClient.fetch<Product[]>(
 	`*[_type == "product"] | order(_createdAt desc) [0...8] {
@@ -27,27 +29,28 @@ const highInterestProducts = await sanityClient.fetch<Product[]>(
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
-	<main
-		class="grow mt-12 sm:mt-16 p-4 sm:p-8 py-12 sm:py-16 md:px-32 md:py-44 flex flex-col gap-6 sm:gap-8"
-		slot="hero">
-		<h1
-			class="tracking-widest text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium font-playfair">
-			Fashion meets Self-Expression
-		</h1>
-		<p
-			class="text-lg sm:text-xl xl:2xl font-montserrat font-light max-w-2xl text-gray-700">
-			A place to elevate your style with our accessories. From statement
-			pieces to timeless essentials, every item is crafted with love and
-			attention to detail
-		</p>
-		<a
-			href="/catalog"
-			id="browse-catalog"
-			class="flex gap-2 justify-center w-full sm:w-auto md:self-start mt-4 sm:mt-6 p-4 sm:p-6 border-2 border-primary shadow-sm rounded-sm font-montserrat font-medium hover:bg-primary hover:text-white">
-			<span>Browse our catalog</span>
-			<ChevronRight id="chevron-right" />
-		</a>
-	</main>
+	<div class="hero h-screen">
+		<main
+			class="grow mt-12 sm:mt-16 p-4 sm:p-8 py-12 sm:py-16 md:px-32 md:py-44 flex flex-col gap-6 sm:gap-8">
+			<h1
+				class="tracking-widest text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium font-playfair">
+				Fashion meets Self-Expression
+			</h1>
+			<p
+				class="text-lg sm:text-xl xl:2xl font-montserrat font-light max-w-2xl text-gray-700">
+				A place to elevate your style with our accessories. From
+				statement pieces to timeless essentials, every item is crafted
+				with love and attention to detail
+			</p>
+			<a
+				href="/catalog"
+				id="browse-catalog"
+				class="flex gap-2 justify-center w-full sm:w-auto md:self-start mt-4 sm:mt-6 p-4 sm:p-6 border-2 border-primary shadow-sm rounded-sm font-montserrat font-medium hover:bg-primary hover:text-white">
+				<span>Browse our catalog</span>
+				<ChevronRight id="chevron-right" />
+			</a>
+		</main>
+	</div>
 
 	<section
 		aria-labelledby="latest"
@@ -88,6 +91,31 @@ const highInterestProducts = await sanityClient.fetch<Product[]>(
 			)
 		}
 	</section>
+	<section
+		aria-labelledby="whatsapp-group"
+		class="p-8 md:p-16 lg:px-32 lg:py-28 font-lexend bg-[#25D366] text-white text-center relative overflow-hidden">
+		<Image
+			src={WhatsAppImage}
+			alt="WhatsApp Icon"
+			class="w-96 absolute right-0 top-1/2 -translate-y-1/2 opacity-10"
+		/>
+		<div>
+			<h2 id="whatsapp-group" class="text-4xl font-medium">
+				Join Our WhatsApp Group
+			</h2>
+			<p class="mt-2">
+				Stay updated with the latest news, offers, and community
+				discussions.
+			</p>
+			<a
+				href="https://chat.whatsapp.com/IMBxX8TVah86rgGIgF1TML"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-4 inline-block bg-white text-[#25D366] px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors">
+				Join Now
+			</a>
+		</div>
+	</section>
 </Layout>
 
 <style>
@@ -117,5 +145,12 @@ const highInterestProducts = await sanityClient.fetch<Product[]>(
 				width: 20px;
 			}
 		}
+	}
+
+	.hero {
+		background-image: url("../assets/images/hero.jpg");
+		background-size: cover;
+		background-position: left top 25%;
+		background-repeat: no-repeat;
 	}
 </style>

@@ -3,13 +3,10 @@ import "../styles/global.css";
 import SearchIcon from "../assets/icons/search-icon.svg";
 import SmileIcon from "../assets/icons/smile.svg";
 import HamburgerIcon from "../assets/icons/hamburger.svg";
-import WhatsAppImage from "../assets/glyphs/whatsapp.svg";
 import BrandLogo from "../assets/logos/brand_logo.png";
-import { Image } from "astro:assets";
 import Sidebar from "../components/Sidebar";
 
 const { pageTitle } = Astro.props;
-const interestsCount = 0;
 ---
 
 <!doctype html>
@@ -28,71 +25,47 @@ const interestsCount = 0;
 		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<div class="hero h-screen">
-			<nav
-				class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-40 lg:px-32 md:px-16">
-				<a href="/" class="flex gap-1 items-center">
-					<img
-						src={BrandLogo.src}
-						alt="Melanin Accessories Logo"
-						class="h-10 md:h-12 w-auto"
-					/>
-					<div
-						class="logo font-bold text-md md:text-xl flex flex-col gap-2">
-						<span class="text-primary">MELANIN</span>
-						<span class="block ms-2 leading-0 text-black"
-							>ACCESSORIES</span
-						>
-					</div>
-				</a>
+		<nav
+			class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-40 lg:px-32 md:px-16">
+			<a href="/" class="flex gap-1 items-center">
+				<img
+					src={BrandLogo.src}
+					alt="Melanin Accessories Logo"
+					class="h-10 md:h-12 w-auto"
+				/>
 				<div
-					class="hidden md:flex items-center gap-6 lg:gap-12 font-normal">
-					<a href="/">HOME</a>
-					<a href="/catalog">CATALOG</a>
-					<a href="/blog">BLOG</a>
-				</div>
-				<div class="hidden md:flex items-center gap-4">
-					<button
-						class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-						<SearchIcon />
-					</button>
-					<button id="interest-count" class="cursor-pointer">
-						MY INTERESTS ({interestsCount})</button
+					class="logo font-bold text-md md:text-xl flex flex-col gap-2">
+					<span class="text-primary">MELANIN</span>
+					<span class="block ms-2 leading-0 text-black"
+						>ACCESSORIES</span
 					>
 				</div>
-				<div class="md:hidden flex items-center gap-4">
-					<SmileIcon class="w-8" />
-					<HamburgerIcon class="w-8" />
-				</div>
-			</nav>
-			<slot name="hero" />
-		</div>
-		<slot />
-		<section
-			aria-labelledby="whatsapp-group"
-			class="p-8 md:p-16 lg:px-32 lg:py-28 font-lexend bg-[#25D366] text-white text-center relative overflow-hidden">
-			<Image
-				src={WhatsAppImage}
-				alt="WhatsApp Icon"
-				class="w-96 absolute right-0 top-1/2 -translate-y-1/2 opacity-10"
-			/>
-			<div>
-				<h2 id="whatsapp-group" class="text-4xl font-medium">
-					Join Our WhatsApp Group
-				</h2>
-				<p class="mt-2">
-					Stay updated with the latest news, offers, and community
-					discussions.
-				</p>
-				<a
-					href="https://chat.whatsapp.com/IMBxX8TVah86rgGIgF1TML"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="mt-4 inline-block bg-white text-[#25D366] px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors">
-					Join Now
-				</a>
+			</a>
+			<div
+				class="hidden md:flex items-center gap-6 lg:gap-12 font-normal">
+				<a href="/">HOME</a>
+				<a href="/catalog">CATALOG</a>
+				<a href="/blog">BLOG</a>
 			</div>
-		</section>
+			<div class="hidden md:flex items-center gap-4">
+				<button
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					<SearchIcon />
+				</button>
+				<button id="interest-count" class="cursor-pointer">
+					MY INTERESTS (0)</button
+				>
+			</div>
+			<div class="md:hidden flex items-center gap-4">
+				<SmileIcon class="w-8" />
+				<HamburgerIcon class="w-8" />
+			</div>
+		</nav>
+
+		<main class="mt-20">
+			<slot />
+		</main>
+
 		<footer class="bg-[#F0F1F0] p-4 md:p-8 lg:px-32 font-lexend">
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
 				<div>
@@ -162,13 +135,6 @@ const interestsCount = 0;
 
 	nav {
 		font-family: var(--font-lexend);
-	}
-
-	.hero {
-		background-image: url("../assets/images/hero.jpg");
-		background-size: cover;
-		background-position: left top 25%;
-		background-repeat: no-repeat;
 	}
 </style>
 
