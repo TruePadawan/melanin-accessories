@@ -39,7 +39,7 @@ export type Product = {
     _key: string;
   }>;
   interestCount: number;
-  category?: {
+  category: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;

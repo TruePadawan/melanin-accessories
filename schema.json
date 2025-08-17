@@ -195,7 +195,7 @@
           },
           "dereferencesTo": "category"
         },
-        "optional": true
+        "optional": false
       },
       "availability": {
         "type": "objectAttribute",
