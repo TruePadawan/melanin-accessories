@@ -90,11 +90,13 @@ export default function CategoriesCarousel() {
 			<ul className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-3 sm:gap-x-4 mt-4">
 				{categories.map((category) => (
 					<li className="w-full max-w-sm mx-auto" key={category._id}>
-						<a href={`/catalog/${category.slug.current}`}>
+						<a
+							href={`/catalog/${category.slug.current}`}
+							className="block overflow-hidden">
 							<img
 								src={urlForImage(category.image).url()}
 								alt={category.title}
-								className="w-full aspect-[3/4] object-cover"
+								className="w-full aspect-[3/4] object-cover transition-transform duration-300 hover:scale-110"
 							/>
 						</a>
 						<a
