@@ -55,7 +55,9 @@ const interestsCount = 0;
 						class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
 						<SearchIcon />
 					</button>
-					<a href="/interests">MY INTERESTS ({interestsCount})</a>
+					<a href="/interests" id="interest-count"
+						>MY INTERESTS ({interestsCount})</a
+					>
 				</div>
 				<div class="md:hidden flex items-center gap-4">
 					<SmileIcon class="w-8" />
@@ -167,3 +169,14 @@ const interestsCount = 0;
 		background-repeat: no-repeat;
 	}
 </style>
+
+<script>
+	import { interests } from "../store/interests";
+
+	interests.subscribe((value) => {
+		const interestCountElement = document.getElementById("interest-count");
+		if (interestCountElement) {
+			interestCountElement.textContent = `MY INTERESTS (${Object.keys(value).length})`;
+		}
+	});
+</script>
