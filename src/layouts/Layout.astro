@@ -24,9 +24,9 @@ const { pageTitle } = Astro.props;
 		/>
 		<title>{pageTitle}</title>
 	</head>
-	<body>
+	<body class="flex flex-col">
 		<nav
-			class="flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-40 lg:px-32 md:px-16">
+			class="h-20 flex items-center justify-between p-4 bg-[#F0F1F0] fixed top-0 left-0 right-0 z-40 lg:px-32 md:px-16">
 			<a href="/" class="flex gap-1 items-center">
 				<img
 					src={BrandLogo.src}
@@ -62,11 +62,11 @@ const { pageTitle } = Astro.props;
 			</div>
 		</nav>
 
-		<main class="mt-20">
+		<div>
 			<slot />
-		</main>
+		</div>
 
-		<footer class="bg-[#F0F1F0] p-4 md:p-8 lg:px-32 font-lexend">
+		<footer class="bg-[#F0F1F0] p-4 md:p-8 lg:px-32 font-lexend mt-auto">
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
 				<div>
 					<h3 class="font-semibold text-lg mb-4">Quick Links</h3>
