@@ -7,10 +7,14 @@ import HeartIcon from "./icons/HeartIcon";
 
 interface ProductItemInterestButtonProps {
 	product: Pick<Product, "_id" | "title" | "slug" | "price" | "images">;
+	iconMode?: boolean;
+	className?: string;
 }
 
 export default function ProductItemInterestButton({
 	product,
+	iconMode = true,
+	className = "",
 }: ProductItemInterestButtonProps) {
 	const $interests = useStore(interests);
 	const productId = product._id;
@@ -31,15 +35,28 @@ export default function ProductItemInterestButton({
 		}
 	}
 	const isInterested = $interests[productId] !== undefined;
-	return (
-		<button
-			className="p-6 cursor-pointer group bg-gray-100"
-			onClick={toggleInterest}>
-			{isInterested ? (
-				<HeartIcon className="w-8 h-auto text-primary group-hover:text-primary-dark group-active:w-7 transition-all duration-100" />
-			) : (
-				<HeartOutlinedIcon className="w-8 h-auto text-primary group-hover:text-primary-dark group-active:w-7 transition-all duration-100" />
-			)}
-		</button>
-	);
+	if (iconMode) {
+		return (
+			<button
+				className={"p-6 cursor-pointer group bg-gray-100 " + className}
+				onClick={toggleInterest}>
+				{isInterested ? (
+					<HeartIcon className="w-8 h-auto text-primary group-hover:text-primary-dark group-active:w-7 transition-all duration-100" />
+				) : (
+					<HeartOutlinedIcon className="w-8 h-auto text-primary group-hover:text-primary-dark group-active:w-7 transition-all duration-100" />
+				)}
+			</button>
+		);
+	} else {
+		return (
+			<button
+				className={
+					"px-10 py-6 bg-primary text-white rounded hover:bg-primary-dark transition-colors duration-200 " +
+					className
+				}
+				onClick={toggleInterest}>
+				{isInterested ? "Remove from Interests" : "Add to Interests"}
+			</button>
+		);
+	}
 }
