@@ -216,7 +216,7 @@
             }
           ]
         },
-        "optional": true
+        "optional": false
       },
       "createdAt": {
         "type": "objectAttribute",

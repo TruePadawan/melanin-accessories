@@ -86,6 +86,7 @@ export const productType = defineType({
 					{ title: "Low Stock", value: "low_stock" },
 				],
 			},
+			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
 			name: "createdAt",

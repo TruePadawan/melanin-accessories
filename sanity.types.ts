@@ -45,7 +45,7 @@ export type Product = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "category";
   };
-  availability?: "in_stock" | "out_of_stock" | "low_stock";
+  availability: "in_stock" | "out_of_stock" | "low_stock";
   createdAt?: string;
 };
 
