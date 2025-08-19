@@ -13,6 +13,25 @@
  */
 
 // Source: schema.json
+export type Inquiry = {
+  _id: string;
+  _type: "inquiry";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  customerName: string;
+  customerPhoneNumber: string;
+  customerLocation: string;
+  customerEmail?: string;
+  items: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "product";
+  }>;
+};
+
 export type Product = {
   _id: string;
   _type: "product";
@@ -191,5 +210,5 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Product | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Inquiry | Product | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
