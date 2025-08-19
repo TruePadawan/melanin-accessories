@@ -1,5 +1,5 @@
 import { useStore } from "@nanostores/react";
-import { interests, isSidebarOpen } from "../store/interests";
+import { interests, isSidebarOpen } from "../store/store";
 import XMarkIcon from "./icons/XMarkIcon";
 import XMarkOutlinedIcon from "./icons/XMarkOutlinedIcon";
 

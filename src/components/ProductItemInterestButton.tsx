@@ -1,6 +1,6 @@
 import { useStore } from "@nanostores/react";
 import type { Product } from "../../sanity.types";
-import { interests } from "../store/interests";
+import { interests } from "../store/store";
 import { urlForImage } from "../utils/sanity-utils";
 import HeartOutlinedIcon from "./icons/HeartOutlinedIcon";
 import HeartIcon from "./icons/HeartIcon";

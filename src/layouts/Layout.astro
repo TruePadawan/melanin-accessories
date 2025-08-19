@@ -139,7 +139,7 @@ const { pageTitle } = Astro.props;
 </style>
 
 <script>
-	import { interests, isSidebarOpen } from "../store/interests";
+	import { interests, isSidebarOpen } from "../store/store";
 
 	const myInterestsButton = document.getElementById("interest-count");
 	interests.subscribe((value) => {
