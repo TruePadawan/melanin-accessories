@@ -12,8 +12,8 @@ export const inquiryType = defineType({
 			validation: (Rule) => Rule.required().min(1).max(100),
 		}),
 		defineField({
-			name: "customerPhoneNumber",
-			title: "Customer Phone Number (WhatsApp)",
+			name: "customerWhatsAppNumber",
+			title: "Customer WhatsApp Number",
 			type: "string",
 			validation: (Rule) => Rule.required().min(10).max(20),
 		}),
@@ -30,6 +30,14 @@ export const inquiryType = defineType({
 			validation: (Rule) => Rule.email().max(100),
 		}),
 		defineField({
+			name: "customerMessage",
+			title: "Customer Message",
+			type: "text",
+			readOnly: true,
+			description: "Message from the customer",
+			validation: (Rule) => Rule.max(1000),
+		}),
+		defineField({
 			name: "items",
 			title: "Items of Interest",
 			type: "array",
@@ -40,6 +48,20 @@ export const inquiryType = defineType({
 				},
 			],
 			validation: (Rule) => Rule.required().min(1),
+		}),
+		defineField({
+			name: "inquiryStatus",
+			title: "Inquiry Status",
+			type: "string",
+			options: {
+				list: [
+					{ title: "New", value: "new" },
+					{ title: "Contacted", value: "contacted" },
+					{ title: "Closed", value: "closed" },
+				],
+			},
+			initialValue: "new",
+			validation: (Rule) => Rule.required(),
 		}),
 	],
 });

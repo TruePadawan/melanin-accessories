@@ -20,9 +20,10 @@ export type Inquiry = {
   _updatedAt: string;
   _rev: string;
   customerName: string;
-  customerPhoneNumber: string;
+  customerWhatsAppNumber: string;
   customerLocation: string;
   customerEmail?: string;
+  customerMessage?: string;
   items: Array<{
     _ref: string;
     _type: "reference";
@@ -30,6 +31,7 @@ export type Inquiry = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "product";
   }>;
+  inquiryStatus: "new" | "contacted" | "closed";
 };
 
 export type Product = {

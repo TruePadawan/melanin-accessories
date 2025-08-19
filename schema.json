@@ -41,7 +41,7 @@
         },
         "optional": false
       },
-      "customerPhoneNumber": {
+      "customerWhatsAppNumber": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -56,6 +56,13 @@
         "optional": false
       },
       "customerEmail": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "customerMessage": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -103,6 +110,27 @@
               }
             }
           }
+        },
+        "optional": false
+      },
+      "inquiryStatus": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "new"
+            },
+            {
+              "type": "string",
+              "value": "contacted"
+            },
+            {
+              "type": "string",
+              "value": "closed"
+            }
+          ]
         },
         "optional": false
       }
