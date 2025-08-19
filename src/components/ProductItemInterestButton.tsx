@@ -51,7 +51,7 @@ export default function ProductItemInterestButton({
 		return (
 			<button
 				className={
-					"px-10 py-6 bg-primary text-white rounded hover:bg-primary-dark transition-colors duration-200 " +
+					"cursor-pointer px-10 py-6 bg-primary text-white rounded hover:bg-primary-dark transition-colors duration-200 " +
 					className
 				}
 				onClick={toggleInterest}>
