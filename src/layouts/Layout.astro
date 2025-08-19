@@ -5,6 +5,7 @@ import SmileIcon from "../assets/icons/smile.svg";
 import HamburgerIcon from "../assets/icons/hamburger.svg";
 import BrandLogo from "../assets/logos/brand_logo.png";
 import Sidebar from "../components/Sidebar";
+import InquiryForm from "../components/InquiryForm";
 
 const { pageTitle } = Astro.props;
 ---
@@ -124,6 +125,7 @@ const { pageTitle } = Astro.props;
 			</p>
 		</footer>
 		<Sidebar client:idle />
+		<InquiryForm client:idle />
 	</body>
 </html>
 

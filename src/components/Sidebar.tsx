@@ -1,5 +1,5 @@
 import { useStore } from "@nanostores/react";
-import { interests, isSidebarOpen } from "../store/store";
+import { interests, isInquiryFormOpen, isSidebarOpen } from "../store/store";
 import XMarkIcon from "./icons/XMarkIcon";
 import XMarkOutlinedIcon from "./icons/XMarkOutlinedIcon";
 
@@ -14,6 +14,11 @@ export default function Sidebar() {
 
 	function handleAsideClick(e: React.MouseEvent) {
 		e.stopPropagation();
+	}
+
+	function showInquiryForm() {
+		isSidebarOpen.set(false);
+		isInquiryFormOpen.set(true);
 	}
 
 	return $isSidebarOpen ? (
@@ -70,7 +75,9 @@ export default function Sidebar() {
 						</ul>
 					)}
 					{interestsList.length > 0 && (
-						<button className="mt-auto cursor-pointer px-10 py-6 bg-accent rounded hover:bg-accent-dark transition-colors duration-200 font-semibold">
+						<button
+							className="mt-auto cursor-pointer px-10 py-6 bg-accent rounded hover:bg-accent-dark transition-colors duration-200 font-semibold"
+							onClick={showInquiryForm}>
 							Make Inquiries
 						</button>
 					)}

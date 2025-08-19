@@ -18,3 +18,5 @@ export const interests = persistentMap<Record<string, ProductOfInterest>>(
 );
 
 export const isSidebarOpen = atom(false);
+
+export const isInquiryFormOpen = atom(false);
