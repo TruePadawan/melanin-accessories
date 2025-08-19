@@ -23,7 +23,7 @@ export default function Sidebar() {
 			<aside
 				className="fixed top-0 right-0 w-96 h-full bg-white shadow-lg z-50"
 				onClick={handleAsideClick}>
-				<div className="p-6">
+				<div className="p-6 flex flex-col h-full">
 					<div className="flex items-center justify-between mb-8">
 						<h2 className="text-2xl font-bold">My Interests</h2>
 						<button
@@ -37,7 +37,7 @@ export default function Sidebar() {
 							No items in your interests yet
 						</p>
 					) : (
-						<ul className="space-y-4">
+						<ul className="flex-1 space-y-4">
 							{interestsList.map((item) => (
 								<li
 									key={item._id}
@@ -68,6 +68,11 @@ export default function Sidebar() {
 								</li>
 							))}
 						</ul>
+					)}
+					{interestsList.length > 0 && (
+						<button className="mt-auto cursor-pointer px-10 py-6 bg-accent rounded hover:bg-accent-dark transition-colors duration-200 font-semibold">
+							Make Inquiries
+						</button>
 					)}
 				</div>
 			</aside>
