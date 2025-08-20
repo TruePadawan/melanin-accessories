@@ -2,7 +2,7 @@
 import { sanityClient } from "sanity:client";
 import Layout from "../layouts/Layout.astro";
 import type { Product } from "../../sanity.types";
-import ProductItem from "../components/ProductItem.astro";
+import ProductItem from "../components/ProductItem";
 import CatalogLayout from "../layouts/CatalogLayout.astro";
 
 const allProducts = await sanityClient.fetch<Product[]>(
@@ -23,7 +23,10 @@ const allProducts = await sanityClient.fetch<Product[]>(
 				allProducts.length > 0 ? (
 					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
 						{allProducts.map((product) => (
-							<ProductItem product={product} />
+							<ProductItem
+								product={product}
+								client:only="react"
+							/>
 						))}
 					</ul>
 				) : (
@@ -37,7 +40,10 @@ const allProducts = await sanityClient.fetch<Product[]>(
 				allProducts.length > 0 ? (
 					<ul class="grid grid-cols-1 xs:grid-cols-2 gap-4">
 						{allProducts.map((product) => (
-							<ProductItem product={product} />
+							<ProductItem
+								product={product}
+								client:only="react"
+							/>
 						))}
 					</ul>
 				) : (

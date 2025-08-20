@@ -2,30 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import ChevronRight from "../assets/icons/chevron-right.svg";
 import CategoriesCarousel from "../components/carousel/CategoriesCarousel";
-import { sanityClient } from "sanity:client";
-import type { Product } from "../../sanity.types.ts";
-import ProductItem from "../components/ProductItem.astro";
 import WhatsAppImage from "../assets/glyphs/whatsapp.svg";
 import { Image } from "astro:assets";
-
-const latestProducts = await sanityClient.fetch<Product[]>(
-	`*[_type == "product"] | order(_createdAt desc) [0...8] {
-		_id,
-		title,
-		slug,
-		price,
-		images
-	}`
-);
-const highInterestProducts = await sanityClient.fetch<Product[]>(
-	`*[_type == "product"] | order(interestCount desc) [0...8] {
-		_id,
-		title,
-		slug,
-		price,
-		images
-	}`
-);
+import ProductsCarousel from "../components/carousel/ProductsCarousel";
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
@@ -52,45 +31,17 @@ const highInterestProducts = await sanityClient.fetch<Product[]>(
 		</main>
 	</div>
 
-	<section
-		aria-labelledby="latest"
-		class="bg-white p-4 sm:p-8 md:p-16 xl:px-32 font-lexend">
-		<div class="flex items-center">
-			<h2 id="latest" class="text-2xl font-medium">Latest</h2>
-		</div>
-		{
-			latestProducts.length > 0 ? (
-				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
-					{latestProducts.map((product) => (
-						<ProductItem product={product} />
-					))}
-				</ul>
-			) : (
-				<p class="text-gray-500">No latest products available.</p>
-			)
-		}
-	</section>
+	<ProductsCarousel
+		orderBy="_createdAt"
+		title="Latest Products"
+		client:load
+	/>
 	<CategoriesCarousel client:load />
-	<section
-		aria-labelledby="latest"
-		class="bg-white p-4 sm:p-8 md:p-16 xl:px-32 font-lexend">
-		<div class="flex items-center">
-			<h2 id="latest" class="text-2xl font-medium">High Interests</h2>
-		</div>
-		{
-			highInterestProducts.length > 0 ? (
-				<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
-					{highInterestProducts.map((product) => (
-						<ProductItem product={product} />
-					))}
-				</ul>
-			) : (
-				<p class="text-gray-500">
-					No high interest products available.
-				</p>
-			)
-		}
-	</section>
+	<ProductsCarousel
+		orderBy="interestCount"
+		title="High Interest"
+		client:load
+	/>
 	<section
 		aria-labelledby="whatsapp-group"
 		class="p-8 md:p-16 lg:px-32 lg:py-28 font-lexend bg-[#25D366] text-white text-center relative overflow-hidden">
