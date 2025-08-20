@@ -3,6 +3,7 @@ import { sanityClient } from "sanity:client";
 import Layout from "../layouts/Layout.astro";
 import type { Product, Category } from "../../sanity.types";
 import ProductItem from "../components/ProductItem.astro";
+import CatalogImage from "../assets/images/catalog.jpg";
 
 const categories = await sanityClient.fetch<Category[]>(
 	`*[_type == "category"] | order(title asc) {
@@ -24,7 +25,17 @@ const allProducts = await sanityClient.fetch<Product[]>(
 ---
 
 <Layout pageTitle="Melanin Accessories - Catalog">
-	<div class="mt-20 p-4 sm:p-8 md:p-16 flex gap-8">
+	<div class="mt-20 flex justify-center max-h-96 bg-primary relative">
+		<img
+			src={CatalogImage.src}
+			alt="catalog hero"
+			class="max-w-4/6 object-cover object-center"
+		/>
+		<p class="absolute top-1/2 text-white text-7xl font-playfair">
+			Catalog
+		</p>
+	</div>
+	<div class="p-4 sm:p-8 md:p-16 flex gap-8">
 		<aside class="w-64">
 			<h2 class="text-3xl text-gray-600 font-playfair">Categories</h2>
 			<ul class="flex flex-col gap-4 mt-4 text-xl">
