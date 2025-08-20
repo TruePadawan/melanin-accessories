@@ -61,19 +61,59 @@ const { pageTitle } = Astro.props;
 			</div>
 			<div class="md:hidden flex items-center gap-4">
 				<button
+					id="mobile-search"
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
+					aria-label="Search">
+					<SearchIcon class="w-6 h-6" />
+				</button>
+				<button
 					id="mobile-interests"
-					class="relative cursor-pointer"
+					class="relative cursor-pointer p-2"
 					aria-label="My interests">
-					<SmileIcon class="w-8" />
+					<SmileIcon class="w-6 h-6" />
 					<span
 						id="mobile-interest-badge"
-						class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium hidden">
+						class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium hidden">
 						0
 					</span>
 				</button>
-				<HamburgerIcon class="w-8" />
+				<button
+					id="menu-toggle"
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
+					aria-label="Toggle menu">
+					<HamburgerIcon class="w-6 h-6" />
+				</button>
 			</div>
 		</nav>
+
+		<div
+			id="mobile-menu"
+			class="fixed inset-0 bg-black/50 z-50 hidden md:hidden">
+			<div class="bg-[#F0F1F0] h-screen w-4/5 max-w-sm ml-auto p-6">
+				<div class="flex justify-end mb-8">
+					<button
+						id="close-menu"
+						class="p-2 rounded-full hover:bg-gray-200 transition-colors">
+						<span class="sr-only">Close menu</span>
+						<svg
+							class="w-6 h-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"></path>
+						</svg>
+					</button>
+				</div>
+				<nav class="flex flex-col gap-6">
+					<a href="/" class="text-xl font-medium">HOME</a>
+					<a href="/catalog" class="text-xl font-medium">CATALOG</a>
+				</nav>
+			</div>
+		</div>
 
 		<div class="mt-20">
 			<slot />
@@ -151,6 +191,14 @@ const { pageTitle } = Astro.props;
 	nav {
 		font-family: var(--font-lexend);
 	}
+
+	#mobile-menu.active {
+		display: block;
+	}
+
+	#mobile-menu.active > div {
+		transform: translateX(0);
+	}
 </style>
 
 <script>
@@ -163,6 +211,16 @@ const { pageTitle } = Astro.props;
 	const myInterestsButton = document.getElementById("interest-count");
 	const mobileInterestsButton = document.getElementById("mobile-interests");
 	const mobileBadge = document.getElementById("mobile-interest-badge");
+	const mobileMenuBadge = document.getElementById("mobile-menu-badge");
+
+	// Mobile menu elements
+	const menuToggle = document.getElementById("menu-toggle");
+	const closeMenu = document.getElementById("close-menu");
+	const mobileMenu = document.getElementById("mobile-menu");
+	const mobileMenuInterests = document.getElementById(
+		"mobile-menu-interests"
+	);
+	const mobileSearchButton = document.getElementById("mobile-search");
 
 	interests.subscribe((value) => {
 		const count = Object.keys(value).length;
@@ -181,8 +239,34 @@ const { pageTitle } = Astro.props;
 				mobileBadge.classList.add("hidden");
 			}
 		}
+
+		// Update mobile menu badge
+		if (mobileMenuBadge) {
+			mobileMenuBadge.textContent = count.toString();
+		}
 	});
 
+	// Mobile menu functionality
+	function toggleMenu() {
+		mobileMenu?.classList.toggle("active");
+		document.body.style.overflow = mobileMenu?.classList.contains("active")
+			? "hidden"
+			: "";
+	}
+
+	function closeMenuHandler() {
+		mobileMenu?.classList.remove("active");
+		document.body.style.overflow = "";
+	}
+
+	// Event listeners
+	menuToggle?.addEventListener("click", toggleMenu);
+	closeMenu?.addEventListener("click", closeMenuHandler);
+	mobileMenu?.addEventListener("click", (e) => {
+		if (e.target === mobileMenu) closeMenuHandler();
+	});
+
+	// Interests buttons
 	myInterestsButton?.addEventListener("click", () => {
 		isSidebarOpen.set(true);
 	});
@@ -191,8 +275,18 @@ const { pageTitle } = Astro.props;
 		isSidebarOpen.set(true);
 	});
 
+	mobileMenuInterests?.addEventListener("click", () => {
+		closeMenuHandler();
+		isSidebarOpen.set(true);
+	});
+
+	// Search buttons
 	const searchButton = document.getElementById("search-button");
 	searchButton?.addEventListener("click", () => {
+		isSearchOverlayOpen.set(true);
+	});
+
+	mobileSearchButton?.addEventListener("click", () => {
 		isSearchOverlayOpen.set(true);
 	});
 </script>
