@@ -1,0 +1,13 @@
+---
+import CatalogImage from "../assets/images/catalog.jpg";
+---
+
+<div class="flex justify-center max-h-96 bg-primary relative">
+	<img
+		src={CatalogImage.src}
+		alt="catalog hero"
+		class="max-w-4/6 object-cover object-center"
+	/>
+	<p class="absolute top-1/2 text-white text-7xl font-playfair">Catalog</p>
+</div>
+<slot />

@@ -3,6 +3,7 @@ import { sanityClient } from "sanity:client";
 import Layout from "../../layouts/Layout.astro";
 import type { Product, Category } from "../../../sanity.types";
 import ProductItem from "../../components/ProductItem.astro";
+import CatalogLayout from "../../layouts/CatalogLayout.astro";
 
 export async function getStaticPaths() {
 	const categories = await sanityClient.fetch<Category[]>(
@@ -40,46 +41,49 @@ const products = await sanityClient.fetch<Product[]>(
 ---
 
 <Layout pageTitle="Melanin Accessories - Catalog">
-	<div class="mt-20 p-4 sm:p-8 md:p-16 flex gap-8">
-		<aside class="w-64">
-			<h2 class="text-3xl text-gray-600 font-playfair">Categories</h2>
-			<ul class="flex flex-col gap-4 mt-4 text-xl">
-				<li>
-					<a href="/catalog" class="text-gray-600 hover:text-primary"
-						>All</a
-					>
-				</li>
+	<CatalogLayout>
+		<div class="p-4 sm:p-8 md:p-16 flex gap-8">
+			<aside class="w-64">
+				<h2 class="text-3xl text-gray-600 font-playfair">Categories</h2>
+				<ul class="flex flex-col gap-4 mt-4 text-xl">
+					<li>
+						<a
+							href="/catalog"
+							class="text-gray-600 hover:text-primary">All</a
+						>
+					</li>
+					{
+						categories.map((category) => (
+							<li>
+								<a
+									href={`/catalog/${category.slug.current}`}
+									class={`text-gray-600 hover:text-primary ${
+										slug === category.slug.current
+											? "font-bold"
+											: ""
+									}`}>
+									{category.title}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</aside>
+			<div class="relative flex-1">
 				{
-					categories.map((category) => (
-						<li>
-							<a
-								href={`/catalog/${category.slug.current}`}
-								class={`text-gray-600 hover:text-primary ${
-									slug === category.slug.current
-										? "font-bold"
-										: ""
-								}`}>
-								{category.title}
-							</a>
-						</li>
-					))
+					products.length > 0 ? (
+						<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
+							{products.map((product) => (
+								<ProductItem product={product} />
+							))}
+						</ul>
+					) : (
+						<p class="text-gray-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+							No products available in this category.
+						</p>
+					)
 				}
-			</ul>
-		</aside>
-		<div class="relative flex-1">
-			{
-				products.length > 0 ? (
-					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
-						{products.map((product) => (
-							<ProductItem product={product} />
-						))}
-					</ul>
-				) : (
-					<p class="text-gray-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-						No products available in this category.
-					</p>
-				)
-			}
+			</div>
 		</div>
-	</div>
+	</CatalogLayout>
 </Layout>
