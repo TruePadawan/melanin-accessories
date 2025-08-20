@@ -6,6 +6,7 @@ import HamburgerIcon from "../assets/icons/hamburger.svg";
 import BrandLogo from "../assets/logos/brand_logo.png";
 import Sidebar from "../components/Sidebar";
 import InquiryForm from "../components/InquiryForm";
+import SearchOverlay from "../components/SearchOverlay";
 
 const { pageTitle } = Astro.props;
 ---
@@ -50,7 +51,8 @@ const { pageTitle } = Astro.props;
 			</div>
 			<div class="hidden md:flex items-center gap-4">
 				<button
-					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+					class="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
+					id="search-button">
 					<SearchIcon />
 				</button>
 				<button id="interest-count" class="cursor-pointer">
@@ -126,6 +128,7 @@ const { pageTitle } = Astro.props;
 		</footer>
 		<Sidebar client:idle />
 		<InquiryForm client:idle />
+		<SearchOverlay client:idle />
 	</body>
 </html>
 
@@ -141,7 +144,11 @@ const { pageTitle } = Astro.props;
 </style>
 
 <script>
-	import { interests, isSidebarOpen } from "../store/store";
+	import {
+		interests,
+		isSearchOverlayOpen,
+		isSidebarOpen,
+	} from "../store/store";
 
 	const myInterestsButton = document.getElementById("interest-count");
 	interests.subscribe((value) => {
@@ -151,5 +158,10 @@ const { pageTitle } = Astro.props;
 	});
 	myInterestsButton?.addEventListener("click", () => {
 		isSidebarOpen.set(true);
+	});
+
+	const searchButton = document.getElementById("search-button");
+	searchButton?.addEventListener("click", () => {
+		isSearchOverlayOpen.set(true);
 	});
 </script>
