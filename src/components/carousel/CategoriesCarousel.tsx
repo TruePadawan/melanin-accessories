@@ -59,7 +59,7 @@ export default function CategoriesCarousel() {
 	return (
 		<section
 			aria-labelledby="categories"
-			className="bg-white p-4 sm:p-8 md:p-16 lg:px-32 font-lexend">
+			className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
 			<div className="flex justify-between items-center">
 				<h2 id="latest" className="text-2xl font-medium">
 					Categories
