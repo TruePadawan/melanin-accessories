@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.4",
     "@astrojs/react": "^4.3.0",
     "@nanostores/persistent": "^1.1.0",
     "@nanostores/react": "^1.0.0",
@@ -28,6 +29,7 @@
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "vite": "^7.1.1"
+    "vite": "^7.1.1",
+    "wrangler": "^4.31.0"
   }
 }
