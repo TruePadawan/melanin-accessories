@@ -1,117 +1,198 @@
 import { sanityClient } from "sanity:client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ChevronRight from "../../assets/icons/chevron-right.svg";
 import ChevronLeft from "../../assets/icons/chevron-left.svg";
 import { urlForImage } from "../../utils/sanity-utils";
 import type { Category } from "../../../sanity.types";
 
 export default function CategoriesCarousel() {
-	const [categories, setCategories] = useState<Category[]>([]);
-	const firstId = useRef<string>("");
-	const lastId = useRef<string>("");
-	const [atEnd, setAtEnd] = useState(false);
-	const [atBeginning, setAtBeginning] = useState(true);
+	const [allCategories, setAllCategories] = useState<Category[]>([]);
+	const [currentPage, setCurrentPage] = useState(0);
+	const [loading, setLoading] = useState(true);
 
-	// Initial fetch of categories
+	const itemsPerPage = 4;
+	const totalPages = Math.ceil(allCategories.length / itemsPerPage);
+	const currentCategories = allCategories.slice(
+		currentPage * itemsPerPage,
+		(currentPage + 1) * itemsPerPage
+	);
+
+	// Fetch all categories once
 	useEffect(() => {
-		fetchCategories("next");
+		async function fetchAllCategories() {
+			try {
+				setLoading(true);
+				const categories = await sanityClient.fetch<Category[]>(
+					`*[_type == "category"] | order(title asc) {
+                        _id, 
+                        title, 
+                        slug, 
+                        image
+                    }`
+				);
+				setAllCategories(categories);
+			} catch (error) {
+				console.error("Failed to fetch categories:", error);
+			} finally {
+				setLoading(false);
+			}
+		}
+
+		fetchAllCategories();
 	}, []);
 
-	async function fetchCategories(direction: "next" | "prev") {
-		if (atEnd && direction === "next") {
-			return;
-		} else if (atBeginning && direction === "prev") {
-			return;
-		}
+	const goToPrevious = () => {
+		setCurrentPage((prev) => Math.max(0, prev - 1));
+	};
 
-		if (direction === "next") {
-			const nextCategories = await sanityClient.fetch<Category[]>(
-				`*[_type == "category" && _id > $lastId] | order(_id) [0...4]{_id, title, slug, image, discount}`,
-				{ lastId: lastId.current }
-			);
+	const goToNext = () => {
+		setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1));
+	};
 
-			setAtEnd(nextCategories.length < 4);
-			if (nextCategories.length > 0) {
-				setAtBeginning(false);
-				setCategories(nextCategories);
-				// Update lastId to the last fetched category's ID
-				lastId.current = nextCategories[nextCategories.length - 1]._id;
-				firstId.current = nextCategories[0]._id;
-			}
-		} else if (direction === "prev") {
-			const prevCategories = await sanityClient.fetch<Category[]>(
-				`*[_type == "category" && _id < $firstId] | order(_id) [0...4]{_id, title, slug, image, discount}`,
-				{ firstId: firstId.current }
-			);
+	const isAtBeginning = currentPage === 0;
+	const isAtEnd =
+		currentPage === totalPages - 1 || allCategories.length === 0;
 
-			if (prevCategories.length > 0) {
-				setAtEnd(false);
-				setCategories(prevCategories);
+	if (loading) {
+		return (
+			<section className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
+				<div className="flex justify-between items-center mb-4">
+					<h2 className="text-2xl sm:text-3xl md:text-4xl text-gray-600 font-playfair">
+						Categories
+					</h2>
+				</div>
+				<div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-3 sm:gap-x-4">
+					{[...Array(4)].map((_, index) => (
+						<div
+							key={index}
+							className="w-full max-w-sm mx-auto animate-pulse">
+							<div className="bg-gray-200 w-full aspect-[3/4] rounded"></div>
+							<div className="mt-3 sm:mt-4">
+								<div className="bg-gray-200 h-6 w-3/4 rounded"></div>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+		);
+	}
 
-				firstId.current = prevCategories[0]._id;
-				lastId.current = prevCategories[prevCategories.length - 1]._id;
-			} else {
-				setAtBeginning(true);
-			}
-		}
+	if (allCategories.length === 0) {
+		return (
+			<section className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
+				<div className="flex justify-between items-center mb-4">
+					<h2 className="text-2xl sm:text-3xl md:text-4xl text-gray-600 font-playfair">
+						Categories
+					</h2>
+				</div>
+				<p className="text-gray-500 text-center py-8">
+					No categories available.
+				</p>
+			</section>
+		);
 	}
 
 	return (
 		<section
 			aria-labelledby="categories"
 			className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
-			<div className="flex justify-between items-center">
-				<h2 id="latest" className="text-2xl font-medium">
+			<div className="flex justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+				<h2
+					id="categories"
+					className="text-2xl sm:text-3xl md:text-4xl text-gray-600 font-playfair">
 					Categories
 				</h2>
-				<div className="flex items-center gap-4">
-					<button
-						className="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer group disabled:hover:bg-white"
-						disabled={atBeginning}
-						onClick={() => fetchCategories("prev")}>
-						<img
-							src={ChevronLeft.src}
-							alt="Previous"
-							className="w-6 h-6 group-disabled:opacity-50"
-						/>
-					</button>
-					<button
-						className="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer group disabled:hover:bg-white"
-						disabled={atEnd}
-						onClick={() => fetchCategories("next")}>
-						<img
-							src={ChevronRight.src}
-							alt="Next"
-							className="w-6 h-6 group-disabled:opacity-50"
-						/>
-					</button>
+
+				{/* Navigation Controls */}
+				<div className="flex items-center gap-2 sm:gap-4">
+					{/* Page Indicator */}
+					<span className="text-sm text-gray-500 hidden sm:inline">
+						{currentPage + 1} of {totalPages}
+					</span>
+
+					{/* Navigation Buttons */}
+					<div className="flex items-center gap-2">
+						<button
+							className="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer group disabled:hover:bg-white disabled:cursor-not-allowed"
+							disabled={isAtBeginning}
+							onClick={goToPrevious}
+							aria-label="Previous categories">
+							<img
+								src={ChevronLeft.src}
+								alt="Previous"
+								className="w-5 h-5 sm:w-6 sm:h-6 group-disabled:opacity-50"
+							/>
+						</button>
+						<button
+							className="p-2 rounded-full hover:bg-gray-200 transition-colors cursor-pointer group disabled:hover:bg-white disabled:cursor-not-allowed"
+							disabled={isAtEnd}
+							onClick={goToNext}
+							aria-label="Next categories">
+							<img
+								src={ChevronRight.src}
+								alt="Next"
+								className="w-5 h-5 sm:w-6 sm:h-6 group-disabled:opacity-50"
+							/>
+						</button>
+					</div>
 				</div>
 			</div>
-			<ul className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-3 sm:gap-x-4 mt-4">
-				{categories.map((category) => (
+
+			{/* Categories Grid */}
+			<ul className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-8 sm:gap-y-10 gap-x-3 sm:gap-x-4">
+				{currentCategories.map((category) => (
 					<li className="w-full max-w-sm mx-auto" key={category._id}>
 						<a
 							href={`/catalog/${category.slug.current}`}
-							className="block overflow-hidden">
+							className="block overflow-hidden group">
 							<img
-								src={urlForImage(category.image).url()}
+								src={urlForImage(category.image)
+									.width(400)
+									.url()}
 								alt={category.title}
-								className="w-full aspect-[3/4] object-cover transition-transform duration-300 hover:scale-110"
+								className="w-full aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-110"
+								loading="lazy"
 							/>
 						</a>
 						<a
-							className="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap]"
+							className="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap] group"
 							href={`/catalog/${category.slug.current}`}>
-							<span>{category.title}</span>
+							<span className="group-hover:text-primary transition-colors">
+								{category.title}
+							</span>
 							<img
 								src={ChevronRight.src}
 								alt="Go to category"
-								className="w-4 h-4"
+								className="w-4 h-4 transition-transform group-hover:translate-x-1"
 							/>
 						</a>
 					</li>
 				))}
 			</ul>
+
+			{/* Mobile Page Indicator */}
+			<div className="flex justify-center mt-6 sm:hidden">
+				<span className="text-sm text-gray-500">
+					{currentPage + 1} of {totalPages}
+				</span>
+			</div>
+
+			{totalPages > 1 && (
+				<div className="flex justify-center gap-2 mt-4 sm:mt-6">
+					{[...Array(totalPages)].map((_, index) => (
+						<button
+							key={index}
+							className={`w-2 h-2 rounded-full transition-colors ${
+								index === currentPage
+									? "bg-primary"
+									: "bg-gray-300 hover:bg-gray-400"
+							}`}
+							onClick={() => setCurrentPage(index)}
+							aria-label={`Go to page ${index + 1}`}
+						/>
+					))}
+				</div>
+			)}
 		</section>
 	);
 }
