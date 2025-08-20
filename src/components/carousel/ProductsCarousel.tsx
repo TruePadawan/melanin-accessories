@@ -1,53 +1,26 @@
-import { sanityClient } from "sanity:client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChevronRight from "../../assets/icons/chevron-right.svg";
 import ChevronLeft from "../../assets/icons/chevron-left.svg";
 import type { Product } from "../../../sanity.types";
 import ProductItem from "../ProductItem";
 
 interface ProductsCarouselProps {
-	orderBy: "_createdAt" | "interestCount";
+	products: Product[];
 	title: string;
 }
+
 export default function ProductsCarousel({
-	orderBy,
+	products,
 	title,
 }: ProductsCarouselProps) {
-	const [allProducts, setAllProducts] = useState<Product[]>([]);
 	const [currentPage, setCurrentPage] = useState(0);
-	const [loading, setLoading] = useState(true);
 
 	const itemsPerPage = 4;
-	const totalPages = Math.ceil(allProducts.length / itemsPerPage);
-	const currentProducts = allProducts.slice(
+	const totalPages = Math.ceil(products.length / itemsPerPage);
+	const currentProducts = products.slice(
 		currentPage * itemsPerPage,
 		(currentPage + 1) * itemsPerPage
 	);
-
-	// Fetch all products once
-	useEffect(() => {
-		async function fetchAllProducts() {
-			try {
-				setLoading(true);
-				const products = await sanityClient.fetch<Product[]>(
-					`*[_type == "product"] | order(${orderBy} desc) [0...8] {
-                        _id,
-                        title,
-                        slug,
-                        price,
-                        images
-                    }`
-				);
-				setAllProducts(products);
-			} catch (error) {
-				console.error("Failed to fetch products:", error);
-			} finally {
-				setLoading(false);
-			}
-		}
-
-		fetchAllProducts();
-	}, []);
 
 	const goToPrevious = () => {
 		setCurrentPage((prev) => Math.max(0, prev - 1));
@@ -58,33 +31,9 @@ export default function ProductsCarousel({
 	};
 
 	const isAtBeginning = currentPage === 0;
-	const isAtEnd = currentPage === totalPages - 1 || allProducts.length === 0;
+	const isAtEnd = currentPage === totalPages - 1 || products.length === 0;
 
-	if (loading) {
-		return (
-			<section className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
-				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-2xl sm:text-3xl md:text-4xl text-gray-600 font-playfair">
-						{title}
-					</h2>
-				</div>
-				<div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-3 sm:gap-x-4">
-					{[...Array(4)].map((_, index) => (
-						<div
-							key={index}
-							className="w-full max-w-sm mx-auto animate-pulse">
-							<div className="bg-gray-200 w-full aspect-[3/4] rounded"></div>
-							<div className="mt-3 sm:mt-4">
-								<div className="bg-gray-200 h-6 w-3/4 rounded"></div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
-		);
-	}
-
-	if (allProducts.length === 0) {
+	if (products.length === 0) {
 		return (
 			<section className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
 				<div className="flex justify-between items-center mb-4">

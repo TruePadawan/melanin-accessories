@@ -1,45 +1,24 @@
-import { sanityClient } from "sanity:client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChevronRight from "../../assets/icons/chevron-right.svg";
 import ChevronLeft from "../../assets/icons/chevron-left.svg";
 import { urlForImage } from "../../utils/sanity-utils";
 import type { Category } from "../../../sanity.types";
 
-export default function CategoriesCarousel() {
-	const [allCategories, setAllCategories] = useState<Category[]>([]);
+interface CategoriesCarouselProps {
+	categories: Category[];
+}
+
+export default function CategoriesCarousel({
+	categories,
+}: CategoriesCarouselProps) {
 	const [currentPage, setCurrentPage] = useState(0);
-	const [loading, setLoading] = useState(true);
 
 	const itemsPerPage = 4;
-	const totalPages = Math.ceil(allCategories.length / itemsPerPage);
-	const currentCategories = allCategories.slice(
+	const totalPages = Math.ceil(categories.length / itemsPerPage);
+	const currentCategories = categories.slice(
 		currentPage * itemsPerPage,
 		(currentPage + 1) * itemsPerPage
 	);
-
-	// Fetch all categories once
-	useEffect(() => {
-		async function fetchAllCategories() {
-			try {
-				setLoading(true);
-				const categories = await sanityClient.fetch<Category[]>(
-					`*[_type == "category"] | order(title asc) {
-                        _id, 
-                        title, 
-                        slug, 
-                        image
-                    }`
-				);
-				setAllCategories(categories);
-			} catch (error) {
-				console.error("Failed to fetch categories:", error);
-			} finally {
-				setLoading(false);
-			}
-		}
-
-		fetchAllCategories();
-	}, []);
 
 	const goToPrevious = () => {
 		setCurrentPage((prev) => Math.max(0, prev - 1));
@@ -50,34 +29,9 @@ export default function CategoriesCarousel() {
 	};
 
 	const isAtBeginning = currentPage === 0;
-	const isAtEnd =
-		currentPage === totalPages - 1 || allCategories.length === 0;
+	const isAtEnd = currentPage === totalPages - 1 || categories.length === 0;
 
-	if (loading) {
-		return (
-			<section className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
-				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-2xl sm:text-3xl md:text-4xl text-gray-600 font-playfair">
-						Categories
-					</h2>
-				</div>
-				<div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-3 sm:gap-x-4">
-					{[...Array(4)].map((_, index) => (
-						<div
-							key={index}
-							className="w-full max-w-sm mx-auto animate-pulse">
-							<div className="bg-gray-200 w-full aspect-[3/4] rounded"></div>
-							<div className="mt-3 sm:mt-4">
-								<div className="bg-gray-200 h-6 w-3/4 rounded"></div>
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
-		);
-	}
-
-	if (allCategories.length === 0) {
+	if (categories.length === 0) {
 		return (
 			<section className="bg-white p-4 sm:p-8 md:px-16 xl:px-32 font-lexend">
 				<div className="flex justify-between items-center mb-4">

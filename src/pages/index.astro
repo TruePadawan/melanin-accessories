@@ -1,10 +1,42 @@
 ---
+import { sanityClient } from "sanity:client";
 import Layout from "../layouts/Layout.astro";
 import ChevronRight from "../assets/icons/chevron-right.svg";
 import CategoriesCarousel from "../components/carousel/CategoriesCarousel";
 import WhatsAppImage from "../assets/glyphs/whatsapp.svg";
 import { Image } from "astro:assets";
 import ProductsCarousel from "../components/carousel/ProductsCarousel";
+import type { Product, Category } from "../../sanity.types";
+
+// Fetch all data server-side
+const [latestProducts, highInterestProducts, categories] = await Promise.all([
+	sanityClient.fetch<Product[]>(
+		`*[_type == "product"] | order(_createdAt desc) [0...8] {
+            _id,
+            title,
+            slug,
+            price,
+            images
+        }`
+	),
+	sanityClient.fetch<Product[]>(
+		`*[_type == "product"] | order(interestCount desc) [0...8] {
+            _id,
+            title,
+            slug,
+            price,
+            images
+        }`
+	),
+	sanityClient.fetch<Category[]>(
+		`*[_type == "category"] | order(title asc) {
+            _id, 
+            title, 
+            slug, 
+            image
+        }`
+	),
+]);
 ---
 
 <Layout pageTitle="Melanin Accessories - Home">
@@ -32,15 +64,15 @@ import ProductsCarousel from "../components/carousel/ProductsCarousel";
 	</div>
 
 	<ProductsCarousel
-		orderBy="_createdAt"
+		products={latestProducts}
 		title="Latest Products"
-		client:load
+		client:only="react"
 	/>
-	<CategoriesCarousel client:load />
+	<CategoriesCarousel categories={categories} client:idle />
 	<ProductsCarousel
-		orderBy="interestCount"
+		products={highInterestProducts}
 		title="High Interest"
-		client:load
+		client:only="react"
 	/>
 	<section
 		aria-labelledby="whatsapp-group"
