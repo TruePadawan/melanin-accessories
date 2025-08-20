@@ -30,7 +30,7 @@ const product = await sanityClient.fetch<ProductWithCategory>(
         description,
         price,
         images,
-		slug,
+        slug,
         category->,
         availability
     }`,
@@ -39,51 +39,127 @@ const product = await sanityClient.fetch<ProductWithCategory>(
 ---
 
 <Layout pageTitle={`${product.title} - Melanin Accessories`}>
-	<div class="mt-20 p-4 sm:p-8 md:p-16 lg:px-80">
-		<div class="flex items-center gap-2 mb-4">
-			<a href={`/catalog/${product.category.slug.current}`}
-				>{product.category.title}</a
-			>
-			<ChevronRightIcon className="inline-block mx-0 w-4" />
-			<span class="text-gray-500">{product.title}</span>
+	<div class="p-4 sm:p-6 md:p-8 lg:p-16 xl:px-32">
+		<!-- Breadcrumb -->
+		<div
+			class="flex items-center gap-2 mb-4 sm:mb-6 text-sm sm:text-base overflow-x-auto">
+			<a
+				href={`/catalog/${product.category.slug.current}`}
+				class="hover:text-primary whitespace-nowrap">
+				{product.category.title}
+			</a>
+			<ChevronRightIcon className="inline-block mx-0 w-4 flex-shrink-0" />
+			<span class="text-gray-500 truncate">{product.title}</span>
 		</div>
-		<div class="mt-8 flex gap-32">
-			<div class="flex gap-4">
-				<ul class="flex flex-col gap-2">
-					{
-						product.images.map((image, index) => (
-							<li class="mb-2">
-								<img
-									src={urlForImage(image).url()}
-									alt={`${product.title} image ${index + 1}`}
-									class="w-50 h-50 object-cover outline-2 outline-gray-300 cursor-pointer hover:outline-primary transition-all duration-200"
-								/>
-							</li>
-						))
-					}
-				</ul>
-				<img
-					src={urlForImage(product.images[0]).url()}
-					alt={product.title}
-					class="w-md h-md object-cover"
-				/>
+
+		<div
+			class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16">
+			<!-- Image Gallery -->
+			<div class="space-y-4">
+				<!-- Main Image -->
+				<div class="aspect-square overflow-hidden rounded-lg">
+					<img
+						id="main-image"
+						src={urlForImage(product.images[0]).width(600).url()}
+						alt={product.title}
+						class="w-full h-full object-cover"
+					/>
+				</div>
+
+				<!-- Thumbnail Images -->
+				{
+					product.images.length > 1 && (
+						<div class="grid grid-cols-4 gap-2 sm:gap-3">
+							{product.images.map((image, index) => (
+								<button
+									class="aspect-square overflow-hidden rounded-md cursor-pointer hover:opacity-80 transition-opacity border-2 border-transparent hover:border-primary"
+									onclick={`document.getElementById('main-image').src = '${urlForImage(image).width(600).url()}'`}>
+									<img
+										src={urlForImage(image)
+											.width(150)
+											.url()}
+										alt={`${product.title} view ${index + 1}`}
+										class="w-full h-full object-cover"
+									/>
+								</button>
+							))}
+						</div>
+					)
+				}
 			</div>
-			<div>
-				<h1 class="text-4xl font-bold mb-2">{product.title}</h1>
-				<p class="text-gray-700 mb-4">{product.description}</p>
-				<p class="text-2xl font-semibold mb-4">
-					NGN {product.price.toFixed(2)}
-				</p>
-				<p
-					class="text-sm text-gray-500 mt-4 mb-2 uppercase font-semibold">
-					{product.availability.replaceAll("_", " ")}
-				</p>
-				<ProductItemInterestButton
-					product={product}
-					iconMode={false}
-					client:load
-				/>
+
+			<!-- Product Details -->
+			<div class="space-y-4 sm:space-y-6">
+				<div>
+					<h1
+						class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4">
+						{product.title}
+					</h1>
+					<p
+						class="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">
+						₦{product.price.toLocaleString()}
+					</p>
+				</div>
+				{
+					product.description && (
+						<div class="max-w-none">
+							<p class="text-gray-700 leading-relaxed">
+								{product.description}
+							</p>
+						</div>
+					)
+				}
+				<div class="flex items-center gap-2">
+					<span
+						class="text-sm sm:text-base font-medium text-gray-600">
+						Status:
+					</span>
+					<span
+						class={`text-sm sm:text-base font-semibold uppercase ${
+							product.availability === "in_stock"
+								? "text-green-600"
+								: product.availability === "low_stock"
+									? "text-yellow-600"
+									: "text-red-600"
+						}`}>
+						{
+							product.availability?.replaceAll("_", " ") ||
+								"In Stock"
+						}
+					</span>
+				</div>
+				<div class="">
+					<ProductItemInterestButton
+						product={product}
+						iconMode={false}
+						client:load
+						className="w-full sm:w-auto"
+					/>
+				</div>
 			</div>
 		</div>
 	</div>
 </Layout>
+
+<script>
+	const thumbnails = document.querySelectorAll("[data-thumbnail]");
+	const mainImage = document.getElementById("main-image") as HTMLImageElement;
+
+	thumbnails.forEach((thumbnail) => {
+		thumbnail.addEventListener("click", () => {
+			if (mainImage && thumbnail instanceof HTMLImageElement) {
+				mainImage.src = thumbnail.dataset.fullsize || thumbnail.src;
+			}
+		});
+	});
+</script>
+
+<style>
+	.aspect-square {
+		aspect-ratio: 1 / 1;
+	}
+
+	#main-image {
+		transition: opacity 0.3s ease;
+	}
+</style>
