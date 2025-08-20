@@ -60,7 +60,17 @@ const { pageTitle } = Astro.props;
 				>
 			</div>
 			<div class="md:hidden flex items-center gap-4">
-				<SmileIcon class="w-8" />
+				<button
+					id="mobile-interests"
+					class="relative cursor-pointer"
+					aria-label="My interests">
+					<SmileIcon class="w-8" />
+					<span
+						id="mobile-interest-badge"
+						class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium hidden">
+						0
+					</span>
+				</button>
 				<HamburgerIcon class="w-8" />
 			</div>
 		</nav>
@@ -151,12 +161,33 @@ const { pageTitle } = Astro.props;
 	} from "../store/store";
 
 	const myInterestsButton = document.getElementById("interest-count");
+	const mobileInterestsButton = document.getElementById("mobile-interests");
+	const mobileBadge = document.getElementById("mobile-interest-badge");
+
 	interests.subscribe((value) => {
+		const count = Object.keys(value).length;
+
+		// Update desktop interests button
 		if (myInterestsButton) {
-			myInterestsButton.textContent = `MY INTERESTS (${Object.keys(value).length})`;
+			myInterestsButton.textContent = `MY INTERESTS (${count})`;
+		}
+
+		// Update mobile interests badge
+		if (mobileBadge) {
+			mobileBadge.textContent = count.toString();
+			if (count > 0) {
+				mobileBadge.classList.remove("hidden");
+			} else {
+				mobileBadge.classList.add("hidden");
+			}
 		}
 	});
+
 	myInterestsButton?.addEventListener("click", () => {
+		isSidebarOpen.set(true);
+	});
+
+	mobileInterestsButton?.addEventListener("click", () => {
 		isSidebarOpen.set(true);
 	});
 
