@@ -1,13 +1,106 @@
 ---
+import { sanityClient } from "sanity:client";
+import type { Category } from "../../sanity.types";
 import CatalogImage from "../assets/images/catalog.jpg";
+
+const { currentSlug } = Astro.props;
+
+const categories = await sanityClient.fetch<Category[]>(
+	`*[_type == "category"] | order(title asc) {
+        _id,
+        title,
+        slug
+    }`
+);
 ---
 
-<div class="flex justify-center max-h-96 bg-primary relative">
+<div
+	class="flex justify-center items-center h-48 sm:h-64 md:h-80 lg:h-96 bg-primary md:px-16 xl:px-32 relative overflow-hidden">
 	<img
 		src={CatalogImage.src}
 		alt="catalog hero"
-		class="max-w-4/6 object-cover object-center"
+		class="w-full h-full object-cover"
 	/>
-	<p class="absolute top-1/2 text-white text-7xl font-playfair">Catalog</p>
+	<h1
+		class="absolute top-1/2 text-white text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-playfair">
+		Catalog
+	</h1>
 </div>
-<slot />
+
+<!-- Categories Section -->
+<div class="p-4 sm:p-8 md:py-16">
+	<!-- Mobile Categories (Badges) -->
+	<div class="md:hidden mb-6">
+		<h2 class="text-2xl text-gray-600 font-playfair mb-4">Categories</h2>
+		<div class="flex flex-wrap gap-2">
+			<a
+				href="/catalog"
+				class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+					!currentSlug
+						? "bg-primary text-white hover:bg-primary/90"
+						: "bg-gray-100 text-gray-700 hover:bg-gray-200"
+				}`}>
+				All
+			</a>
+			{
+				categories.map((category) => (
+					<a
+						href={`/catalog/${category.slug.current}`}
+						class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+							currentSlug === category.slug.current
+								? "bg-primary text-white hover:bg-primary/90"
+								: "bg-gray-100 text-gray-700 hover:bg-gray-200"
+						}`}>
+						{category.title}
+					</a>
+				))
+			}
+		</div>
+	</div>
+
+	<div class="hidden md:flex gap-8">
+		<aside class="w-64 xl:w-80">
+			<div class="bg-gray-50 p-4 sm:p-6 rounded-lg">
+				<h2
+					class="text-2xl sm:text-3xl text-gray-600 font-playfair mb-4 sm:mb-6">
+					Categories
+				</h2>
+				<ul
+					class="flex flex-col gap-2 sm:gap-4 text-base sm:text-lg lg:text-xl">
+					<li>
+						<a
+							href="/catalog"
+							class={`text-gray-600 hover:text-primary px-3 py-2 lg:px-0 rounded lg:rounded-none bg-white lg:bg-transparent ${
+								!currentSlug ? "font-bold" : ""
+							}`}>
+							All
+						</a>
+					</li>
+					{
+						categories.map((category) => (
+							<li>
+								<a
+									href={`/catalog/${category.slug.current}`}
+									class={`text-gray-600 hover:text-primary px-3 py-2 lg:px-0 rounded lg:rounded-none bg-white lg:bg-transparent ${
+										currentSlug === category.slug.current
+											? "font-bold"
+											: ""
+									}`}>
+									{category.title}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</aside>
+
+		<div class="flex-1">
+			<slot name="desktop-content" />
+		</div>
+	</div>
+
+	<div class="md:hidden">
+		<slot name="mobile-content" />
+	</div>
+</div>

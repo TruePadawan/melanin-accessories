@@ -1,68 +1,49 @@
 ---
 import { sanityClient } from "sanity:client";
 import Layout from "../layouts/Layout.astro";
-import type { Product, Category } from "../../sanity.types";
+import type { Product } from "../../sanity.types";
 import ProductItem from "../components/ProductItem.astro";
 import CatalogLayout from "../layouts/CatalogLayout.astro";
 
-const categories = await sanityClient.fetch<Category[]>(
-	`*[_type == "category"] | order(title asc) {
-		_id,
-		title,
-		slug
-	}`
-);
-
 const allProducts = await sanityClient.fetch<Product[]>(
 	`*[_type == "product"] | order(_createdAt desc) {
-		_id,
-		title,
-		slug,
-		price,
-		images
-	}`
+        _id,
+        title,
+        slug,
+        price,
+        images
+    }`
 );
 ---
 
 <Layout pageTitle="Melanin Accessories - Catalog">
 	<CatalogLayout>
-		<div class="p-4 sm:p-8 md:p-16 flex gap-8">
-			<aside class="w-64">
-				<h2 class="text-3xl text-gray-600 font-playfair">Categories</h2>
-				<ul class="flex flex-col gap-4 mt-4 text-xl">
-					<li>
-						<a
-							href="/catalog"
-							class="text-gray-600 hover:text-primary font-bold"
-							>All</a
-						>
-					</li>
-					{
-						categories.map((category) => (
-							<li>
-								<a
-									href={`/catalog/${category.slug.current}`}
-									class="text-gray-600 hover:text-primary">
-									{category.title}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</aside>
-			<div>
-				{
-					allProducts.length > 0 ? (
-						<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 mt-4">
-							{allProducts.map((product) => (
-								<ProductItem product={product} />
-							))}
-						</ul>
-					) : (
-						<p class="text-gray-600 mt-4">No products available.</p>
-					)
-				}
-			</div>
-		</div>
+		<Fragment slot="desktop-content">
+			{
+				allProducts.length > 0 ? (
+					<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+						{allProducts.map((product) => (
+							<ProductItem product={product} />
+						))}
+					</ul>
+				) : (
+					<p class="text-gray-600">No products available.</p>
+				)
+			}
+		</Fragment>
+
+		<Fragment slot="mobile-content">
+			{
+				allProducts.length > 0 ? (
+					<ul class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+						{allProducts.map((product) => (
+							<ProductItem product={product} />
+						))}
+					</ul>
+				) : (
+					<p class="text-gray-600">No products available.</p>
+				)
+			}
+		</Fragment>
 	</CatalogLayout>
 </Layout>
