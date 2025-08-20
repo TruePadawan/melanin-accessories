@@ -2,6 +2,7 @@
 import { sanityClient } from "sanity:client";
 import type { Category } from "../../sanity.types";
 import CatalogImage from "../assets/images/catalog.jpg";
+import { Image } from "astro:assets";
 
 const { currentSlug } = Astro.props;
 
@@ -16,8 +17,8 @@ const categories = await sanityClient.fetch<Category[]>(
 
 <div
 	class="flex justify-center items-center h-48 sm:h-64 md:h-80 lg:h-96 bg-primary md:px-16 xl:px-32 relative overflow-hidden">
-	<img
-		src={CatalogImage.src}
+	<Image
+		src={CatalogImage}
 		alt="catalog hero"
 		class="w-full h-full object-cover"
 	/>
