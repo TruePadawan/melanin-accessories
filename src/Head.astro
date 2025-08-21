@@ -1,0 +1,33 @@
+---
+const { pageTitle } = Astro.props;
+---
+
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" href="/favicon.png" />
+<meta name="generator" content={Astro.generator} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+	rel="stylesheet"
+/>
+<title>{pageTitle}</title>
+<meta
+	name="description"
+	content="A place to elevate your style with our accessories. From
+				statement pieces to timeless essentials, every item is crafted
+				with love and attention to detail"
+/>
+<!-- <link rel="canonical" href="https://www.example.com/preferred-page-url" /> -->
+
+<!-- Open Graph tags -->
+<meta property="og:title" content={pageTitle} />
+<meta property="og:site_name" content="Melanin Accessories" />
+<meta property="og:type" content="website" />
+<!-- <meta property="og:url" content="http://www.example.com/" /> -->
+<meta
+	property="og:description"
+	content="A place to elevate your style with our accessories. From statement pieces to timeless essentials, every item is crafted with love and attention to detail"
+/>
+<meta property="og:image" content="https://i.imgur.com/LEPg2FO.png" />
+<meta property="og:image:alt" content="A collection of stylish accessories" />

@@ -8,6 +8,7 @@ import BrandLogo from "../assets/logos/brand_logo.png";
 import Sidebar from "../components/Sidebar";
 import InquiryForm from "../components/InquiryForm";
 import SearchOverlay from "../components/SearchOverlay";
+import Head from "../Head.astro";
 
 const { pageTitle } = Astro.props;
 ---
@@ -16,16 +17,7 @@ const { pageTitle } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/favicon.png" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-			rel="stylesheet"
-		/>
-		<title>{pageTitle}</title>
+		<Head pageTitle={pageTitle} />
 	</head>
 	<body class="flex flex-col">
 		<nav
@@ -79,9 +71,7 @@ const { pageTitle } = Astro.props;
 				</button>
 			</div>
 		</nav>
-	</body>
-
-	<div
+	</body><div
 		id="mobile-menu"
 		class="fixed inset-0 bg-black/50 z-50 hidden md:hidden">
 		<div class="bg-[#F0F1F0] h-screen w-4/5 max-w-sm ml-auto p-6">
