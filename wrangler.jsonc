@@ -10,15 +10,5 @@
 	},
 	"observability": {
 		"enabled": true
-	},
-	"routes": [
-		{
-			"pattern": "melaninaccessories.live",
-			"custom_domain": true
-		},
-		{
-			"pattern": "*.melaninaccessories.live/*",
-			"zone_id": "4c46dadbced12d09e4cd56e66cd380bd"
-		}
-	]
+	}
 }
