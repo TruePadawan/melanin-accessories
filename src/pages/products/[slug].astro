@@ -5,7 +5,7 @@ import ChevronRightIcon from "../../components/icons/ChevronRightIcon.tsx";
 import type { Product } from "../../../sanity.types";
 import type { ProductWithCategory } from "../../types";
 import { urlForImage } from "../../utils/sanity-utils";
-import ProductItemInterestButton from "../../components/ProductItemInterestButton";
+import ProductWishlistButton from "../../components/ProductWishlistButton";
 
 export async function getStaticPaths() {
 	const products = await sanityClient.fetch<Product[]>(
@@ -129,7 +129,7 @@ const product = await sanityClient.fetch<ProductWithCategory>(
 					</span>
 				</div>
 				<div class="">
-					<ProductItemInterestButton
+					<ProductWishlistButton
 						product={product}
 						iconMode={false}
 						client:load

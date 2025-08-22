@@ -62,8 +62,8 @@ export const productType = defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
-			name: "interestCount",
-			title: "Interest Count",
+			name: "wishlistCount",
+			title: "Wishlist Count",
 			type: "number",
 			initialValue: 0,
 			validation: (Rule) => Rule.required().min(0),

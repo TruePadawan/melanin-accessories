@@ -1,31 +1,31 @@
 import { useStore } from "@nanostores/react";
 import type { Product } from "../../sanity.types";
-import { interests } from "../store/store";
+import { wishlistedProducts } from "../store/store";
 import { urlForImage } from "../utils/sanity-utils";
 import HeartOutlinedIcon from "./icons/HeartOutlinedIcon";
 import HeartIcon from "./icons/HeartIcon";
 
-interface ProductItemInterestButtonProps {
+interface ProductWishlistButtonProps {
 	product: Pick<Product, "_id" | "title" | "slug" | "price" | "images">;
 	iconMode?: boolean;
 	className?: string;
 }
 
-export default function ProductItemInterestButton({
+export default function ProductWishlistButton({
 	product,
 	iconMode = true,
 	className = "",
-}: ProductItemInterestButtonProps) {
-	const $interests = useStore(interests);
+}: ProductWishlistButtonProps) {
+	const $wishlistedProducts = useStore(wishlistedProducts);
 	const productId = product._id;
 
-	function toggleInterest() {
-		if ($interests[productId]) {
-			// Remove from interests
-			interests.setKey(productId, undefined);
+	function addOrRemoveFromWishlist() {
+		if ($wishlistedProducts[productId]) {
+			// Remove from wishlist
+			wishlistedProducts.setKey(productId, undefined);
 		} else {
-			// Add to interests
-			interests.setKey(productId, {
+			// Add to wishlist
+			wishlistedProducts.setKey(productId, {
 				_id: productId,
 				title: product.title,
 				price: product.price.toString(),
@@ -34,13 +34,13 @@ export default function ProductItemInterestButton({
 			});
 		}
 	}
-	const isInterested = $interests[productId] !== undefined;
+	const isWishlisted = $wishlistedProducts[productId] !== undefined;
 	if (iconMode) {
 		return (
 			<button
 				className={"p-6 cursor-pointer group bg-gray-100 " + className}
-				onClick={toggleInterest}>
-				{isInterested ? (
+				onClick={addOrRemoveFromWishlist}>
+				{isWishlisted ? (
 					<HeartIcon className="w-8 h-auto text-primary group-hover:text-primary-dark group-active:w-7 transition-all duration-100" />
 				) : (
 					<HeartOutlinedIcon className="w-8 h-auto text-primary group-hover:text-primary-dark group-active:w-7 transition-all duration-100" />
@@ -54,8 +54,8 @@ export default function ProductItemInterestButton({
 					"cursor-pointer px-10 py-6 bg-primary text-white rounded hover:bg-primary-dark transition-colors duration-200 " +
 					className
 				}
-				onClick={toggleInterest}>
-				{isInterested ? "Remove from Interests" : "Add to Interests"}
+				onClick={addOrRemoveFromWishlist}>
+				{isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
 			</button>
 		);
 	}

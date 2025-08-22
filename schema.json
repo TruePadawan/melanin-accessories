@@ -297,7 +297,7 @@
         },
         "optional": false
       },
-      "interestCount": {
+      "wishlistCount": {
         "type": "objectAttribute",
         "value": {
           "type": "number"

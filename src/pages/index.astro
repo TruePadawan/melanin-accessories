@@ -9,7 +9,7 @@ import ProductsCarousel from "../components/carousel/ProductsCarousel";
 import type { Product, Category } from "../../sanity.types";
 
 // Fetch all data server-side
-const [latestProducts, highInterestProducts, categories] = await Promise.all([
+const [latestProducts, mostWishlistedProducts, categories] = await Promise.all([
 	sanityClient.fetch<Product[]>(
 		`*[_type == "product"] | order(_createdAt desc) [0...8] {
             _id,
@@ -20,7 +20,7 @@ const [latestProducts, highInterestProducts, categories] = await Promise.all([
         }`
 	),
 	sanityClient.fetch<Product[]>(
-		`*[_type == "product"] | order(interestCount desc) [0...8] {
+		`*[_type == "product"] | order(wishlistCount desc) [0...8] {
             _id,
             title,
             slug,
@@ -70,8 +70,8 @@ const [latestProducts, highInterestProducts, categories] = await Promise.all([
 	/>
 	<CategoriesCarousel categories={categories} client:idle />
 	<ProductsCarousel
-		products={highInterestProducts}
-		title="High Interest"
+		products={mostWishlistedProducts}
+		title="Most Wishlisted Products"
 		client:only="react"
 	/>
 	<section

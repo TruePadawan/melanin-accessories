@@ -1,12 +1,16 @@
 import { useStore } from "@nanostores/react";
-import { interests, isInquiryFormOpen, isSidebarOpen } from "../store/store";
+import {
+	wishlistedProducts,
+	isInquiryFormOpen,
+	isSidebarOpen,
+} from "../store/store";
 import XMarkIcon from "./icons/XMarkIcon";
 import XMarkOutlinedIcon from "./icons/XMarkOutlinedIcon";
 
 export default function Sidebar() {
 	const $isSidebarOpen = useStore(isSidebarOpen);
-	const $interests = useStore(interests);
-	const interestsList = Object.values($interests);
+	const $wishlistedProducts = useStore(wishlistedProducts);
+	const wishlistedProductsList = Object.values($wishlistedProducts);
 
 	function closeSidebar() {
 		isSidebarOpen.set(false);
@@ -30,20 +34,20 @@ export default function Sidebar() {
 				onClick={handleAsideClick}>
 				<div className="p-6 flex flex-col h-full">
 					<div className="flex items-center justify-between mb-8">
-						<h2 className="text-2xl font-bold">My Interests</h2>
+						<h2 className="text-2xl font-bold">My Wishlist</h2>
 						<button
 							onClick={closeSidebar}
 							className="text-gray-500 hover:text-gray-700 cursor-pointer">
 							<XMarkOutlinedIcon className="w-6 h-auto" />
 						</button>
 					</div>
-					{interestsList.length === 0 ? (
+					{wishlistedProductsList.length === 0 ? (
 						<p className="text-gray-500 text-center py-8">
-							No items in your interests yet
+							No items in your wishlist yet
 						</p>
 					) : (
 						<ul className="flex-1 space-y-4">
-							{interestsList.map((item) => (
+							{wishlistedProductsList.map((item) => (
 								<li
 									key={item._id}
 									className="flex gap-4 items-center">
@@ -63,7 +67,7 @@ export default function Sidebar() {
 									<button
 										className="text-red-500 hover:text-red-700 ms-auto"
 										onClick={() =>
-											interests.setKey(
+											wishlistedProducts.setKey(
 												item._id,
 												undefined
 											)
@@ -74,7 +78,7 @@ export default function Sidebar() {
 							))}
 						</ul>
 					)}
-					{interestsList.length > 0 && (
+					{wishlistedProductsList.length > 0 && (
 						<button
 							className="mt-auto cursor-pointer px-10 py-6 bg-accent rounded hover:bg-accent-dark transition-colors duration-200 font-semibold"
 							onClick={showInquiryForm}>

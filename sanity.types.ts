@@ -59,7 +59,7 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
-  interestCount: number;
+  wishlistCount: number;
   category: {
     _ref: string;
     _type: "reference";

@@ -39,7 +39,7 @@ export const inquiryType = defineType({
 		}),
 		defineField({
 			name: "items",
-			title: "Items of Interest",
+			title: "Wishlisted Products",
 			type: "array",
 			of: [
 				{

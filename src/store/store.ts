@@ -2,14 +2,16 @@ import { persistentMap } from "@nanostores/persistent";
 import type { Product } from "../../sanity.types";
 import { atom } from "nanostores";
 
-export type ProductOfInterest = Pick<Product, "_id" | "title"> & {
+export type WishlistedProduct = Pick<Product, "_id" | "title"> & {
 	slug: string;
 	price: string;
 	image: string;
 };
 
-export const interests = persistentMap<Record<string, ProductOfInterest>>(
-	"interests:",
+export const wishlistedProducts = persistentMap<
+	Record<string, WishlistedProduct>
+>(
+	"wishlist:",
 	{},
 	{
 		encode: JSON.stringify,

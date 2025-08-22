@@ -1,6 +1,6 @@
 import type { Product } from "../../sanity.types";
 import { urlForImage } from "../utils/sanity-utils";
-import ProductItemInterestButton from "./ProductItemInterestButton";
+import ProductWishlistButton from "./ProductWishlistButton";
 
 interface ProductItemProps {
 	product: Pick<Product, "_id" | "title" | "slug" | "price" | "images">;
@@ -31,7 +31,7 @@ export default function ProductItem({ product }: ProductItemProps) {
 						₦{product.price.toFixed(2)}
 					</p>
 				</div>
-				<ProductItemInterestButton product={product} />
+				<ProductWishlistButton product={product} />
 			</div>
 		</li>
 	);

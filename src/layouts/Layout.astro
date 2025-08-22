@@ -47,18 +47,18 @@ const { pageTitle } = Astro.props;
 					id="search-button">
 					<SearchIcon />
 				</button>
-				<button id="interest-count" class="cursor-pointer">
-					MY INTERESTS (0)</button
+				<button id="wishlist-btn" class="cursor-pointer">
+					MY WISHLIST (0)</button
 				>
 			</div>
 			<div class="md:hidden flex items-center gap-2">
 				<button
-					id="mobile-interests"
+					id="mobile-wishlist-btn"
 					class="relative cursor-pointer p-2"
-					aria-label="My interests">
+					aria-label="My wishlist">
 					<SmileIcon class="w-6 h-6" />
 					<span
-						id="mobile-interest-badge"
+						id="wishlist-count-badge"
 						class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium hidden">
 						0
 					</span>
@@ -71,7 +71,8 @@ const { pageTitle } = Astro.props;
 				</button>
 			</div>
 		</nav>
-	</body><div
+	</body><!-- MOBILE MENU -->
+	<div
 		id="mobile-menu"
 		class="fixed inset-0 bg-black/50 z-50 hidden md:hidden">
 		<div class="bg-[#F0F1F0] h-screen w-4/5 max-w-sm ml-auto p-6">
@@ -168,34 +169,30 @@ const { pageTitle } = Astro.props;
 
 <script>
 	import {
-		interests,
+		wishlistedProducts,
 		isSearchOverlayOpen,
 		isSidebarOpen,
 	} from "../store/store";
 
-	const myInterestsButton = document.getElementById("interest-count");
-	const mobileInterestsButton = document.getElementById("mobile-interests");
-	const mobileBadge = document.getElementById("mobile-interest-badge");
-	const mobileMenuBadge = document.getElementById("mobile-menu-badge");
+	const wishlistButton = document.getElementById("wishlist-btn");
+	const mobileWishlistButton = document.getElementById("mobile-wishlist-btn");
+	const mobileBadge = document.getElementById("wishlist-count-badge");
 
 	// Mobile menu elements
 	const menuToggle = document.getElementById("menu-toggle");
 	const closeMenu = document.getElementById("close-menu");
 	const mobileMenu = document.getElementById("mobile-menu");
-	const mobileMenuInterests = document.getElementById(
-		"mobile-menu-interests"
-	);
 	const mobileSearchButton = document.getElementById("mobile-search");
 
-	interests.subscribe((value) => {
+	wishlistedProducts.subscribe((value) => {
 		const count = Object.keys(value).length;
 
-		// Update desktop interests button
-		if (myInterestsButton) {
-			myInterestsButton.textContent = `MY INTERESTS (${count})`;
+		// Update desktop wishlist button
+		if (wishlistButton) {
+			wishlistButton.textContent = `MY WISHLIST (${count})`;
 		}
 
-		// Update mobile interests badge
+		// Update mobile wishlist badge
 		if (mobileBadge) {
 			mobileBadge.textContent = count.toString();
 			if (count > 0) {
@@ -203,11 +200,6 @@ const { pageTitle } = Astro.props;
 			} else {
 				mobileBadge.classList.add("hidden");
 			}
-		}
-
-		// Update mobile menu badge
-		if (mobileMenuBadge) {
-			mobileMenuBadge.textContent = count.toString();
 		}
 	});
 
@@ -231,17 +223,12 @@ const { pageTitle } = Astro.props;
 		if (e.target === mobileMenu) closeMenuHandler();
 	});
 
-	// Interests buttons
-	myInterestsButton?.addEventListener("click", () => {
+	// Wishlist buttons
+	wishlistButton?.addEventListener("click", () => {
 		isSidebarOpen.set(true);
 	});
 
-	mobileInterestsButton?.addEventListener("click", () => {
-		isSidebarOpen.set(true);
-	});
-
-	mobileMenuInterests?.addEventListener("click", () => {
-		closeMenuHandler();
+	mobileWishlistButton?.addEventListener("click", () => {
 		isSidebarOpen.set(true);
 	});
 

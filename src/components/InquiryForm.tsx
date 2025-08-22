@@ -1,16 +1,16 @@
 import { useStore } from "@nanostores/react";
-import { interests, isInquiryFormOpen } from "../store/store";
+import { wishlistedProducts, isInquiryFormOpen } from "../store/store";
 import XMarkOutlinedIcon from "./icons/XMarkOutlinedIcon";
 import { useState } from "react";
 import HeartIcon from "./icons/HeartIcon";
 
 export default function InquiryForm() {
 	const $isInquiryFormOpen = useStore(isInquiryFormOpen);
-	const $interests = useStore(interests);
+	const $wishlistedProducts = useStore(wishlistedProducts);
 	const [submitting, setSubmitting] = useState(false);
 	const [inquiryWasSent, setInquiryWasSent] = useState(false);
 	const [errorResponse, setErrorResponse] = useState("");
-	const interestsList = Object.values($interests);
+	const wishlistedProductsList = Object.values($wishlistedProducts);
 
 	if (!$isInquiryFormOpen) return null;
 
@@ -25,7 +25,7 @@ export default function InquiryForm() {
 		const formData = new FormData(event.currentTarget);
 		formData.append(
 			"items",
-			JSON.stringify(interestsList.map((item) => item._id))
+			JSON.stringify(wishlistedProductsList.map((item) => item._id))
 		);
 		const response = await fetch("/api/inquiry", {
 			method: "POST",
@@ -115,10 +115,10 @@ export default function InquiryForm() {
 					</div>
 					<div>
 						<label className="block text-sm font-medium mb-1">
-							Items of Interest
+							Wishlisted Products
 						</label>
 						<div className="flex flex-wrap gap-2">
-							{interestsList.map((item) => (
+							{wishlistedProductsList.map((item) => (
 								<span
 									key={item._id}
 									className="bg-gray-100 text-gray-800 px-3 py-1 text-sm">
