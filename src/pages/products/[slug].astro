@@ -30,12 +30,31 @@ const product = await sanityClient.fetch<ProductWithCategory>(
         description,
         price,
         images,
+        discount,
         slug,
-        category->,
+        category->{
+            _id,
+            title,
+            slug,
+            discount
+        },
         availability
     }`,
 	{ slug }
 );
+
+// Determine discount: product > category > none
+const discount =
+	typeof product.discount === "number"
+		? product.discount
+		: typeof product.category?.discount === "number"
+			? product.category.discount
+			: null;
+
+const discountedPrice =
+	discount && discount > 0
+		? Math.round(product.price * (1 - discount / 100))
+		: null;
 ---
 
 <Layout pageTitle={`${product.title} - Melanin Accessories`}>
@@ -57,13 +76,20 @@ const product = await sanityClient.fetch<ProductWithCategory>(
 			<!-- Image Gallery -->
 			<div class="space-y-4">
 				<!-- Main Image -->
-				<div class="aspect-square overflow-hidden rounded-lg">
+				<div class="aspect-square overflow-hidden rounded-lg relative">
 					<img
 						id="main-image"
 						src={urlForImage(product.images[0]).width(600).url()}
 						alt={product.title}
 						class="w-full h-full object-cover"
 					/>
+					{
+						discount && (
+							<span class="absolute top-2 left-2 bg-primary text-white text-xs sm:text-sm font-semibold px-2 py-1 rounded">
+								{discount}% OFF
+							</span>
+						)
+					}
 				</div>
 
 				<!-- Thumbnail Images -->
@@ -95,10 +121,22 @@ const product = await sanityClient.fetch<ProductWithCategory>(
 						class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4">
 						{product.title}
 					</h1>
-					<p
-						class="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">
-						₦{product.price.toLocaleString()}
-					</p>
+					{
+						discountedPrice ? (
+							<div class="flex items-end gap-3">
+								<p class="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">
+									₦{discountedPrice.toLocaleString()}
+								</p>
+								<p class="text-base sm:text-lg line-through text-gray-400 mb-1">
+									₦{product.price.toLocaleString()}
+								</p>
+							</div>
+						) : (
+							<p class="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">
+								₦{product.price.toLocaleString()}
+							</p>
+						)
+					}
 				</div>
 				{
 					product.description && (
@@ -140,19 +178,6 @@ const product = await sanityClient.fetch<ProductWithCategory>(
 		</div>
 	</div>
 </Layout>
-
-<script>
-	const thumbnails = document.querySelectorAll("[data-thumbnail]");
-	const mainImage = document.getElementById("main-image") as HTMLImageElement;
-
-	thumbnails.forEach((thumbnail) => {
-		thumbnail.addEventListener("click", () => {
-			if (mainImage && thumbnail instanceof HTMLImageElement) {
-				mainImage.src = thumbnail.dataset.fullsize || thumbnail.src;
-			}
-		});
-	});
-</script>
 
 <style>
 	.aspect-square {

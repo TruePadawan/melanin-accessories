@@ -98,7 +98,7 @@ export default function CategoriesCarousel({
 					<li className="w-full max-w-sm mx-auto" key={category._id}>
 						<a
 							href={`/catalog/${category.slug.current}`}
-							className="block overflow-hidden group">
+							className="block overflow-hidden group relative">
 							<img
 								src={urlForImage(category.image)
 									.width(400)
@@ -107,6 +107,11 @@ export default function CategoriesCarousel({
 								className="w-full aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-110"
 								loading="lazy"
 							/>
+							{category.discount && (
+								<span className="absolute top-2 left-2 bg-primary text-white text-xs sm:text-sm font-semibold px-2 py-1 rounded">
+									{category.discount}% OFF
+								</span>
+							)}
 						</a>
 						<a
 							className="mt-3 sm:mt-4 font-semibold text-base sm:text-lg flex items-center gap-2 hover:gap-4 transition-[gap] group"

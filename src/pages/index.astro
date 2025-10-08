@@ -16,6 +16,7 @@ const [latestProducts, mostWishlistedProducts, categories] = await Promise.all([
             title,
             slug,
             price,
+			discount,
             images
         }`
 	),
@@ -25,6 +26,7 @@ const [latestProducts, mostWishlistedProducts, categories] = await Promise.all([
             title,
             slug,
             price,
+			discount,
             images
         }`
 	),
@@ -32,7 +34,8 @@ const [latestProducts, mostWishlistedProducts, categories] = await Promise.all([
 		`*[_type == "category"] | order(title asc) {
             _id, 
             title, 
-            slug, 
+            slug,
+			discount, 
             image
         }`
 	),
