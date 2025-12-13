@@ -107,7 +107,7 @@ export default function CategoriesCarousel({
 								className="w-full aspect-[3/4] object-cover transition-transform duration-300 group-hover:scale-110"
 								loading="lazy"
 							/>
-							{category.discount && (
+							{category.discount > 0 && (
 								<span className="absolute top-2 left-2 bg-primary text-white text-xs sm:text-sm font-semibold px-2 py-1 rounded">
 									{category.discount}% OFF
 								</span>

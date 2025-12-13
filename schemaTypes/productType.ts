@@ -38,7 +38,7 @@ export const productType = defineType({
 			type: "number",
 			initialValue: 0,
 			description: "Discount percentage (0-100)",
-			validation: (Rule) => Rule.min(0).max(100),
+			validation: (Rule) => Rule.min(0).max(100).required(),
 		}),
 		defineField({
 			name: "images",

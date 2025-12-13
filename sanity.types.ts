@@ -44,7 +44,7 @@ export type Product = {
   slug: Slug;
   description?: string;
   price: number;
-  discount?: number;
+  discount: number;
   images: Array<{
     asset?: {
       _ref: string;
@@ -78,7 +78,7 @@ export type Category = {
   _rev: string;
   title: string;
   slug: Slug;
-  discount?: number;
+  discount: number;
   image: {
     asset?: {
       _ref: string;

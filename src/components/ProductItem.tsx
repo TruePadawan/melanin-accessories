@@ -23,7 +23,7 @@ export default function ProductItem({ product }: ProductItemProps) {
 					alt={product.title}
 					className="w-full aspect-square object-cover transition-transform duration-300 hover:scale-110"
 				/>
-				{product.discount && (
+				{product.discount > 0 && (
 					<span className="absolute top-2 left-2 bg-primary text-white text-xs sm:text-sm font-semibold px-2 py-1 rounded">
 						{product.discount}% OFF
 					</span>

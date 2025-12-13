@@ -28,7 +28,7 @@ export const categoryType = defineType({
 			initialValue: 0,
 			description:
 				"Discount percentage for products in this category (0-100)",
-			validation: (Rule) => Rule.min(0).max(100),
+			validation: (Rule) => Rule.min(0).max(100).required(),
 		}),
 		defineField({
 			name: "image",
