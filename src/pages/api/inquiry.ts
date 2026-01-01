@@ -57,13 +57,13 @@ export const POST: APIRoute = async ({ request }) => {
 	// Send email to site owner
     await resend.emails.send({
       from: "Melanin Accessories <inquiries@notifications.melaninaccessories.live>",
-      to: ["hermeschigoziri@gmail.com"],
+      to: ["melaninaccessories539@gmail.com"],
       subject: `New Inquiry from ${customerName}`,
       html: `
         <h1>New Product Inquiry</h1>
         <p><strong>Customer:</strong> ${customerName} (${customerWhatsAppNumber}) ${customerEmail ?? ""}</p>
         <p><strong>Message:</strong> ${customerMessage}</p>
-        <h2>Interested Products:</h2>
+        <h2>Wishlisted Products:</h2>
         <ul>
           ${items.map((item) => `<li>${item.title}</li>`).join('')}
         </ul>
