@@ -25,7 +25,12 @@ export default function InquiryForm() {
 		const formData = new FormData(event.currentTarget);
 		formData.append(
 			"items",
-			JSON.stringify(wishlistedProductsList.map((item) => item._id))
+			JSON.stringify(wishlistedProductsList.map((item) => {
+				return {
+					id: item._id,
+					title: item.title
+				}
+			}))
 		);
 		const response = await fetch("/api/inquiry", {
 			method: "POST",

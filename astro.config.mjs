@@ -45,6 +45,11 @@ export default defineConfig({
 				access: "secret",
 				optional: false,
 			}),
+			RESEND_API_KEY: envField.string({
+				context: "server",
+				access: "secret",
+				optional: false,
+			}),
 		},
 	},
 
